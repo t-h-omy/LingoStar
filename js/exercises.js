@@ -54,19 +54,50 @@ export function getVerbs() {
 export function selectVerb(progress) {
   if (verbs.length === 0) return null;
   
-  // Words with broken stars should be selected more frequently
-  const brokenVerbs = verbs.filter(v => {
-    const state = progress[v.infinitive];
-    return state && state.state === 'broken';
-  });
-  
-  // 70% chance to pick broken verb if any exist
-  if (brokenVerbs.length > 0 && Math.random() < 0.7) {
-    return brokenVerbs[Math.floor(Math.random() * brokenVerbs.length)];
+  // Track recently used verbs to avoid immediate repetition
+  if (!selectVerb.recentVerbs) {
+    selectVerb.recentVerbs = [];
   }
   
-  // Otherwise pick randomly from all verbs
-  return verbs[Math.floor(Math.random() * verbs.length)];
+  // Get verbs by state
+  const brokenVerbs = verbs.filter(v => {
+    const state = progress[v.infinitive];
+    return state && state.state === 'broken' && !selectVerb.recentVerbs.includes(v.infinitive);
+  });
+  
+  const otherVerbs = verbs.filter(v => {
+    const state = progress[v.infinitive];
+    return (!state || state.state !== 'broken') && !selectVerb.recentVerbs.includes(v.infinitive);
+  });
+  
+  // If no non-recent verbs available, clear recent list
+  if (brokenVerbs.length === 0 && otherVerbs.length === 0) {
+    selectVerb.recentVerbs = [];
+    return selectVerb(progress); // Retry with cleared list
+  }
+  
+  let selectedVerb;
+  
+  // Weighted random selection: 60-70% chance for broken verbs
+  if (brokenVerbs.length > 0 && Math.random() < 0.65) {
+    selectedVerb = brokenVerbs[Math.floor(Math.random() * brokenVerbs.length)];
+  } else if (otherVerbs.length > 0) {
+    selectedVerb = otherVerbs[Math.floor(Math.random() * otherVerbs.length)];
+  } else if (brokenVerbs.length > 0) {
+    // Fall back to broken verbs if no others available
+    selectedVerb = brokenVerbs[Math.floor(Math.random() * brokenVerbs.length)];
+  } else {
+    // Last resort: pick any verb
+    selectedVerb = verbs[Math.floor(Math.random() * verbs.length)];
+  }
+  
+  // Track this verb as recently used (keep last 5)
+  selectVerb.recentVerbs.push(selectedVerb.infinitive);
+  if (selectVerb.recentVerbs.length > 5) {
+    selectVerb.recentVerbs.shift();
+  }
+  
+  return selectedVerb;
 }
 
 /**

@@ -120,6 +120,21 @@ export function renderCurrentStar(verbState, infinitive) {
 }
 
 /**
+ * Get task type icon based on exercise type
+ * @param {string} exerciseType - Type of exercise
+ * @returns {string} Icon emoji
+ */
+function getTaskIcon(exerciseType) {
+  const icons = {
+    'input_field': '✏️',
+    'translation': '🌍',
+    'sentence_gap': '💬',
+    'multiple_choice': '🎯'
+  };
+  return icons[exerciseType] || '✏️';
+}
+
+/**
  * Render exercise question and answer area
  * @param {Object} exercise - Exercise data
  */
@@ -148,12 +163,25 @@ export function renderExercise(exercise) {
       answerEl.appendChild(button);
     });
   } else {
+    // Create a container for input with icon
+    const inputContainer = document.createElement('div');
+    inputContainer.className = 'input-container';
+    
+    // Add icon
+    const icon = document.createElement('span');
+    icon.className = 'input-icon';
+    icon.textContent = getTaskIcon(exercise.type);
+    inputContainer.appendChild(icon);
+    
+    // Add input field
     const input = document.createElement('input');
     input.type = 'text';
     input.id = 'answer-input';
     input.className = 'answer-input';
     input.placeholder = 'Type your answer here...';
-    answerEl.appendChild(input);
+    inputContainer.appendChild(input);
+    
+    answerEl.appendChild(inputContainer);
   }
 }
 
@@ -249,4 +277,23 @@ export function setOkButton(text, onClick) {
   const button = document.getElementById('ok-button');
   button.textContent = text;
   button.onclick = onClick;
+}
+
+/**
+ * Get star display for dictionary (emoji representation)
+ * @param {Object} verbState - State of the verb
+ * @returns {string} Star emoji
+ */
+export function getStarDisplayForDictionary(verbState) {
+  if (verbState.state === 'broken') {
+    return '💔'; // Broken heart/star
+  } else if (verbState.state === 'frozen') {
+    return '❄️'; // Frozen
+  } else if (verbState.level === 0) {
+    return '☆'; // Outline star
+  } else {
+    // Colored stars based on level
+    const colors = ['', '⭐', '💗', '💙', '💜', '🌟'];
+    return colors[verbState.level] || '☆';
+  }
 }
