@@ -333,10 +333,19 @@ body {
   align-items: center;
 }
 
+.input-row {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
 .input-container {
   position: relative;
-  width: 100%;
-  max-width: 400px;
+  flex: 1;
+  max-width: 500px;
   display: flex;
   align-items: center;
 }
@@ -370,9 +379,19 @@ body {
   background: #f0f0f0;
 }
 
-.option-button {
+.option-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.option-button {
+  flex: 1;
+  max-width: 500px;
   padding: 15px 25px;
   font-size: 18px;
   font-family: inherit;
@@ -385,6 +404,10 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.option-button.with-ok-button {
+  max-width: 480px;
+}
+
 .option-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
@@ -392,12 +415,38 @@ body {
 
 .option-button.selected {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .option-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Compact inline OK button */
+.ok-button-inline {
+  padding: 15px 30px;
+  min-width: 70px;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: bold;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+  flex-shrink: 0;
+}
+
+.ok-button-inline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+}
+
+.ok-button-inline:active {
+  transform: translateY(0);
 }
 
 /* Bottom Bar */
@@ -412,6 +461,7 @@ body {
   border-top: 2px solid #e0e0e0;
   flex-shrink: 0; /* Prevent bottom bar from shrinking */
   position: relative;
+  min-height: 70px; /* Ensure consistent height even without button */
 }
 
 /* When keyboard is active, keep bottom bar in place */
@@ -452,47 +502,6 @@ body {
 
 .feedback-appear {
   animation: feedbackAppear 0.3s ease;
-}
-
-#ok-button {
-  padding: 15px 60px;
-  font-size: 20px;
-  font-family: inherit;
-  font-weight: bold;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
-  position: relative;
-}
-
-/* OK button when keyboard is visible - moves above keyboard */
-#ok-button.keyboard-visible {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  transition: bottom 0.3s ease, transform 0.3s ease;
-}
-
-#ok-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
-}
-
-#ok-button.keyboard-visible:hover {
-  transform: translateX(-50%) translateY(-3px);
-}
-
-#ok-button:active {
-  transform: translateY(-1px);
-}
-
-#ok-button.keyboard-visible:active {
-  transform: translateX(-50%) translateY(-1px);
 }
 
 /* Responsive Design */
@@ -567,6 +576,10 @@ body {
     padding: 12px 20px;
   }
   
+  .option-button.with-ok-button {
+    max-width: calc(100% - 80px);
+  }
+  
   .answer-input {
     font-size: 18px;
     padding: 12px 20px 12px 50px; /* Adjusted for icon */
@@ -575,6 +588,17 @@ body {
   .input-icon {
     left: 12px;
     font-size: 20px;
+  }
+  
+  .ok-button-inline {
+    padding: 12px 20px;
+    min-width: 60px;
+    font-size: 16px;
+  }
+  
+  .input-row, .option-container {
+    max-width: 100%;
+    gap: 8px;
   }
   
   #bottom-bar {

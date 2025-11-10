@@ -337,12 +337,36 @@ function setupEventListeners() {
   // Multiple choice button selection
   document.getElementById('answer-area').addEventListener('click', (e) => {
     if (e.target.classList.contains('option-button')) {
-      // Deselect all
+      const optionContainer = e.target.parentElement;
+      const answerArea = document.getElementById('answer-area');
+      
+      // Remove previous OK buttons and deselect all
       document.querySelectorAll('.option-button').forEach(btn => {
         btn.classList.remove('selected');
+        const container = btn.parentElement;
+        const existingOk = container.querySelector('.ok-button-inline');
+        if (existingOk) existingOk.remove();
       });
-      // Select clicked
+      
+      // Select clicked option
       e.target.classList.add('selected');
+      
+      // Add inline OK button next to selected option
+      const okButton = document.createElement('button');
+      okButton.id = 'ok-button';
+      okButton.className = 'ok-button-inline';
+      okButton.textContent = 'OK';
+      optionContainer.appendChild(okButton);
+      
+      // Shrink the option button to make room
+      e.target.classList.add('with-ok-button');
+    }
+  });
+  
+  // Delegate click for dynamically created OK buttons
+  document.addEventListener('click', (e) => {
+    if (e.target.id === 'ok-button' || e.target.classList.contains('ok-button-inline')) {
+      handleSubmitAnswer();
     }
   });
   
@@ -386,34 +410,8 @@ function setupEventListeners() {
  * Handle viewport resize (mobile keyboard appearance)
  */
 function handleViewportResize() {
-  const viewport = window.visualViewport;
-  const input = document.getElementById('answer-input');
-  const okButton = document.getElementById('ok-button');
-  const bottomBar = document.getElementById('bottom-bar');
-  
-  if (!viewport) return;
-  
-  // Check if keyboard is likely visible (viewport height significantly reduced)
-  const viewportHeight = viewport.height;
-  const windowHeight = window.innerHeight;
-  const keyboardVisible = viewportHeight < windowHeight * 0.75;
-  
-  if (keyboardVisible && input && !input.disabled) {
-    // Calculate the keyboard height
-    const keyboardHeight = windowHeight - viewportHeight;
-    
-    // Move only the OK button above the keyboard
-    okButton.classList.add('keyboard-visible');
-    okButton.style.bottom = `${keyboardHeight + 20}px`; // 20px padding above keyboard
-    
-    // Keep bottom bar in place but hide it or make it transparent
-    bottomBar.classList.add('keyboard-active');
-  } else {
-    // Reset to normal position when keyboard is hidden
-    okButton.classList.remove('keyboard-visible');
-    okButton.style.bottom = '';
-    bottomBar.classList.remove('keyboard-active');
-  }
+  // Since OK button is now inline with the input/options, no special handling needed
+  // The viewport will naturally adjust with the inline button staying in place
 }
 
 /**

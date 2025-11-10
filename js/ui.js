@@ -141,9 +141,11 @@ function getTaskIcon(exerciseType) {
 export function renderExercise(exercise) {
   const questionEl = document.getElementById('question-text');
   const answerEl = document.getElementById('answer-area');
+  const inlineOkContainer = document.getElementById('inline-ok-container');
   
   // Clear previous content
   questionEl.innerHTML = '';
+  inlineOkContainer.innerHTML = '';
   
   // For input_field and translation exercises, format with instruction and target on separate lines
   if (exercise.type === 'input_field' && exercise.targetWord) {
@@ -175,14 +177,22 @@ export function renderExercise(exercise) {
   
   if (exercise.type === 'multiple_choice') {
     exercise.options.forEach(option => {
+      const optionContainer = document.createElement('div');
+      optionContainer.className = 'option-container';
+      
       const button = document.createElement('button');
       button.className = 'option-button';
       button.textContent = option;
       button.dataset.answer = option;
-      answerEl.appendChild(button);
+      
+      optionContainer.appendChild(button);
+      answerEl.appendChild(optionContainer);
     });
   } else {
-    // Create a container for input with icon
+    // Create a container for input with icon and inline OK button
+    const inputRow = document.createElement('div');
+    inputRow.className = 'input-row';
+    
     const inputContainer = document.createElement('div');
     inputContainer.className = 'input-container';
     
@@ -200,7 +210,16 @@ export function renderExercise(exercise) {
     input.placeholder = 'Type your answer here...';
     inputContainer.appendChild(input);
     
-    answerEl.appendChild(inputContainer);
+    // Add inline OK button
+    const okButton = document.createElement('button');
+    okButton.id = 'ok-button';
+    okButton.className = 'ok-button-inline';
+    okButton.textContent = 'OK';
+    
+    inputRow.appendChild(inputContainer);
+    inputRow.appendChild(okButton);
+    
+    answerEl.appendChild(inputRow);
   }
 }
 
@@ -290,12 +309,13 @@ export function enableAnswerInput() {
 /**
  * Set OK button state
  * @param {string} text - Button text
- * @param {Function} onClick - Click handler
+ * @param {Function} onClick - Click handler (no longer used, handled by event delegation)
  */
 export function setOkButton(text, onClick) {
   const button = document.getElementById('ok-button');
-  button.textContent = text;
-  button.onclick = onClick;
+  if (button) {
+    button.textContent = text;
+  }
 }
 
 /**
