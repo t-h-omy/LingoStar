@@ -375,6 +375,18 @@ body {
   gap: 15px;
   border-top: 2px solid #e0e0e0;
   flex-shrink: 0; /* Prevent bottom bar from shrinking */
+  position: relative; /* Allow for repositioning when keyboard is visible */
+  transition: transform 0.3s ease; /* Smooth transition when keyboard opens/closes */
+}
+
+/* When keyboard is visible, move bottom bar up but keep other content in place */
+#bottom-bar.keyboard-visible {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transform: translateY(0);
 }
 
 #feedback-text {
@@ -537,6 +549,50 @@ body {
   pointer-events: none;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   font-family: 'Arial', sans-serif;
+}
+
+/* Update notification */
+#update-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+#update-button {
+  padding: 12px 24px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+  transition: all 0.3s ease;
+}
+
+#update-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.7);
+}
+
+#update-button:active {
+  transform: translateY(0);
 }
 
 /* Special handling for very small screens or when keyboard is visible */

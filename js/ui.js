@@ -1,5 +1,19 @@
 // ui.js - Manages DOM updates and rendering
 
+// Preload sound effects
+const sounds = {
+  correct: new Audio('assets/sounds/sfx_correct.mp3'),
+  incorrect: new Audio('assets/sounds/sfx_incorrect.mp3'),
+  freeze: new Audio('assets/sounds/sfx_freeze.mp3'),
+  unfreeze: new Audio('assets/sounds/sfx_unfreeze.mp3')
+};
+
+// Preload all sounds
+Object.values(sounds).forEach(sound => {
+  sound.preload = 'auto';
+  sound.load();
+});
+
 /**
  * Get star image path based on level and state
  * @param {number} level - Star level (0-5)
@@ -173,11 +187,17 @@ export function clearFeedback() {
 
 /**
  * Play sound effect
- * @param {boolean} isCorrect - Whether to play correct or wrong sound
+ * @param {string} soundType - Type of sound to play: 'correct', 'incorrect', 'freeze', 'unfreeze'
  */
-export function playSound(isCorrect) {
-  const sound = new Audio(isCorrect ? 'assets/sounds/correct.mp3' : 'assets/sounds/wrong.mp3');
-  sound.play().catch(e => console.log('Sound play failed:', e));
+export function playSound(soundType) {
+  const sound = sounds[soundType];
+  if (sound) {
+    // Stop any currently playing instance and reset
+    sound.pause();
+    sound.currentTime = 0;
+    // Play the sound
+    sound.play().catch(e => console.log('Sound play failed:', e));
+  }
 }
 
 /**

@@ -16,11 +16,14 @@ let deferredPrompt = null;
  * Initialize the app
  */
 async function init() {
-  // Register service worker
+  // Register service worker with update handling
   if ('serviceWorker' in navigator) {
     try {
-      await navigator.serviceWorker.register('./service-worker.js');
+      const registration = await navigator.serviceWorker.register('./service-worker.js');
       console.log('Service Worker registered');
+      
+      // Handle updates
+      setupServiceWorkerUpdateHandler(registration);
     } catch (e) {
       console.log('Service Worker registration failed:', e);
     }
@@ -49,6 +52,56 @@ async function init() {
   
   // Set up PWA install prompt
   setupPWAInstallPrompt();
+}
+
+/**
+ * Set up service worker update handler
+ * @param {ServiceWorkerRegistration} registration - Service worker registration
+ */
+function setupServiceWorkerUpdateHandler(registration) {
+  // Check for updates periodically
+  setInterval(() => {
+    registration.update();
+  }, 60000); // Check every minute
+  
+  // Handle update found
+  registration.addEventListener('updatefound', () => {
+    const newWorker = registration.installing;
+    
+    newWorker.addEventListener('statechange', () => {
+      if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+        // New service worker installed, show update notification
+        showUpdateNotification(newWorker);
+      }
+    });
+  });
+  
+  // Handle controller change (when new SW takes over)
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    // Reload page to show new version
+    window.location.reload();
+  });
+}
+
+/**
+ * Show update notification to user
+ * @param {ServiceWorker} newWorker - The new service worker
+ */
+function showUpdateNotification(newWorker) {
+  const notification = document.getElementById('update-notification');
+  const updateButton = document.getElementById('update-button');
+  
+  // Show the notification
+  notification.style.display = 'block';
+  
+  // Handle update button click
+  updateButton.onclick = () => {
+    // Tell the new service worker to skip waiting
+    newWorker.postMessage({ type: 'SKIP_WAITING' });
+    
+    // Hide the notification
+    notification.style.display = 'none';
+  };
 }
 
 /**
@@ -153,7 +206,10 @@ function handleSubmitAnswer() {
   
   // Update UI
   ui.showFeedback(isCorrect, currentExercise.correctAnswer);
-  ui.playSound(isCorrect);
+  
+  // Play appropriate sound effect
+  playSoundForStateChange(oldState, newState, isCorrect);
+  
   ui.disableAnswerInput();
   
   // Animate star transition
@@ -205,6 +261,32 @@ function getUserAnswer() {
   } else {
     const input = document.getElementById('answer-input');
     return input ? input.value.trim() : null;
+  }
+}
+
+/**
+ * Play sound effect based on state change
+ * @param {Object} oldState - Previous state
+ * @param {Object} newState - New state
+ * @param {boolean} isCorrect - Whether answer was correct
+ */
+function playSoundForStateChange(oldState, newState, isCorrect) {
+  if (isCorrect) {
+    if (oldState.state === 'frozen' && newState.state === 'active') {
+      // Frozen star unfrozen
+      ui.playSound('unfreeze');
+    } else {
+      // Any other correct answer
+      ui.playSound('correct');
+    }
+  } else {
+    if (oldState.state === 'active' && oldState.level > 0 && newState.state === 'frozen') {
+      // Colored star frozen
+      ui.playSound('freeze');
+    } else {
+      // Any other incorrect answer
+      ui.playSound('incorrect');
+    }
   }
 }
 
@@ -295,7 +377,7 @@ function setupEventListeners() {
 function handleViewportResize() {
   const viewport = window.visualViewport;
   const input = document.getElementById('answer-input');
-  const okButton = document.getElementById('ok-button');
+  const bottomBar = document.getElementById('bottom-bar');
   
   if (!viewport) return;
   
@@ -304,14 +386,17 @@ function handleViewportResize() {
   const windowHeight = window.innerHeight;
   const keyboardVisible = viewportHeight < windowHeight * 0.75;
   
-  if (keyboardVisible && input) {
-    // Scroll input and button into view
+  if (keyboardVisible && input && !input.disabled) {
+    // Add class to make bottom bar fixed when keyboard is visible
+    bottomBar.classList.add('keyboard-visible');
+    
+    // Scroll input into view smoothly
     setTimeout(() => {
-      const bottomBar = document.getElementById('bottom-bar');
-      if (bottomBar) {
-        bottomBar.scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }
+      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 100);
+  } else {
+    // Remove fixed positioning when keyboard is hidden
+    bottomBar.classList.remove('keyboard-visible');
   }
 }
 
