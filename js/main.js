@@ -68,7 +68,7 @@ function startNewExercise() {
   
   // Update UI
   const verbState = storage.getVerbState(progress, currentVerb.infinitive);
-  ui.renderCurrentStar(verbState);
+  ui.renderCurrentStar(verbState, currentVerb.infinitive);
   ui.renderExercise(currentExercise);
   ui.enableAnswerInput();
   
@@ -109,7 +109,7 @@ function handleSubmitAnswer() {
   animateStateTransition(oldState, newState, isCorrect);
   
   // Update displays
-  ui.renderCurrentStar(newState);
+  ui.renderCurrentStar(newState, currentVerb.infinitive);
   updateStarSummary();
   
   // Change button to "Next"

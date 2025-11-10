@@ -9,7 +9,7 @@ let exerciseData = {};
  */
 export async function loadVerbs() {
   try {
-    const response = await fetch('data/verbs.json');
+    const response = await fetch('lingostar_verbs.json');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -20,9 +20,9 @@ export async function loadVerbs() {
       throw new Error('Verbs data must be an array');
     }
     
-    // Validate each verb has required fields
+    // Validate each verb has required fields including exercises
     data.forEach((verb, index) => {
-      if (!verb.infinitive || !verb.past || !verb.translation) {
+      if (!verb.infinitive || !verb.past || !verb.translation || !verb.exercises) {
         console.warn(`Verb at index ${index} is missing required fields:`, verb);
       }
     });
@@ -94,11 +94,23 @@ export function selectExerciseType() {
  * @returns {Object} Exercise data
  */
 function generateMultipleChoice(verb) {
+  // Use exercise data from JSON if available
+  if (verb.exercises && verb.exercises.multiple_choice) {
+    const exercise = verb.exercises.multiple_choice;
+    return {
+      type: EXERCISE_TYPES.MULTIPLE_CHOICE,
+      question: exercise.question,
+      options: exercise.options,
+      correctAnswer: exercise.answer
+    };
+  }
+  
+  // Fallback to generated exercises (should not be needed with complete JSON)
   const wrongOptions = verbs
     .filter(v => v.infinitive !== verb.infinitive)
     .map(v => v.past)
     .sort(() => Math.random() - 0.5)
-    .slice(0, 3);
+    .slice(0, 2);
   
   const options = [verb.past, ...wrongOptions].sort(() => Math.random() - 0.5);
   
@@ -116,6 +128,17 @@ function generateMultipleChoice(verb) {
  * @returns {Object} Exercise data
  */
 function generateInputField(verb) {
+  // Use exercise data from JSON if available
+  if (verb.exercises && verb.exercises.input) {
+    const exercise = verb.exercises.input;
+    return {
+      type: EXERCISE_TYPES.INPUT_FIELD,
+      question: exercise.question,
+      correctAnswer: exercise.answer
+    };
+  }
+  
+  // Fallback
   return {
     type: EXERCISE_TYPES.INPUT_FIELD,
     question: `Type the past simple form of "${verb.infinitive}":`,
@@ -129,78 +152,22 @@ function generateInputField(verb) {
  * @returns {Object} Exercise data
  */
 function generateTranslation(verb) {
-  // Use simple template-based German-to-English translations
-  // Note: These are simplified for 6th graders and focus on the verb form
-  const germanVerb = getGermanVerb(verb);
-  
-  // Handle "be" specially since it has different forms
-  let pastForm1, pastForm2, pastForm3;
-  if (verb.infinitive === 'be') {
-    pastForm1 = 'was';  // I was
-    pastForm2 = 'was';  // he was
-    pastForm3 = 'was';  // she was
-  } else {
-    pastForm1 = verb.past;
-    pastForm2 = verb.past;
-    pastForm3 = verb.past;
+  // Use exercise data from JSON if available
+  if (verb.exercises && verb.exercises.translation) {
+    const exercise = verb.exercises.translation;
+    return {
+      type: EXERCISE_TYPES.TRANSLATION,
+      question: exercise.question,
+      correctAnswer: exercise.answer
+    };
   }
   
-  const templates = [
-    { 
-      de: `Gestern ${germanVerb} ich.`, 
-      en: `Yesterday I ${pastForm1}.` 
-    },
-    { 
-      de: `Letzte Woche ${germanVerb} er.`, 
-      en: `Last week he ${pastForm2}.` 
-    },
-    { 
-      de: `Sie ${germanVerb} vor einem Jahr.`, 
-      en: `She ${pastForm3} a year ago.` 
-    }
-  ];
-  
-  const sentence = templates[Math.floor(Math.random() * templates.length)];
-  
+  // Fallback: simple translation exercise
   return {
     type: EXERCISE_TYPES.TRANSLATION,
-    question: `Translate to English: "${sentence.de}"`,
-    hint: `Use the past simple form of "${verb.infinitive}"`,
-    correctAnswer: sentence.en
+    question: `Translate the past form of "${verb.infinitive}" (German: ${verb.translation})`,
+    correctAnswer: verb.past
   };
-}
-
-/**
- * Get a simplified German verb form for translation exercises
- * @param {Object} verb - Target verb
- * @returns {string} German verb representation
- */
-function getGermanVerb(verb) {
-  // Simplified German verb mapping for educational purposes
-  const germanVerbs = {
-    'go': 'ging',
-    'come': 'kam',
-    'see': 'sah',
-    'have': 'hatte',
-    'do': 'machte',
-    'make': 'machte',
-    'get': 'bekam',
-    'take': 'nahm',
-    'give': 'gab',
-    'find': 'fand',
-    'think': 'dachte',
-    'know': 'wusste',
-    'tell': 'erzählte',
-    'say': 'sagte',
-    'write': 'schrieb',
-    'read': 'las',
-    'eat': 'aß',
-    'drink': 'trank',
-    'run': 'lief',
-    'be': 'war'
-  };
-  
-  return germanVerbs[verb.infinitive] || verb.infinitive;
 }
 
 /**
@@ -209,32 +176,24 @@ function getGermanVerb(verb) {
  * @returns {Object} Exercise data
  */
 function generateSentenceGap(verb) {
-  // Define sentences with subject-verb agreement
-  const sentenceTemplates = [
-    { text: `Yesterday, I ___ to the store.`, subject: 'I' },
-    { text: `Last week, she ___ a new book.`, subject: 'she' },
-    { text: `He ___ his homework yesterday.`, subject: 'he' },
-    { text: `They ___ to the park last Sunday.`, subject: 'they' },
-    { text: `We ___ a great time at the party.`, subject: 'we' }
-  ];
-  
-  const template = sentenceTemplates[Math.floor(Math.random() * sentenceTemplates.length)];
-  
-  // Handle "be" with correct form based on subject
-  let correctAnswer = verb.past;
-  if (verb.infinitive === 'be') {
-    if (template.subject === 'I' || template.subject === 'he' || template.subject === 'she') {
-      correctAnswer = 'was';
-    } else {
-      correctAnswer = 'were';
-    }
+  // Use exercise data from JSON if available
+  if (verb.exercises && verb.exercises.gap) {
+    const exercise = verb.exercises.gap;
+    const sentence = exercise.before_gap + '___' + exercise.after_gap;
+    return {
+      type: EXERCISE_TYPES.SENTENCE_GAP,
+      question: `Fill in the gap ${exercise.infinitive_hint}:`,
+      sentence: sentence,
+      correctAnswer: exercise.answer
+    };
   }
   
+  // Fallback
   return {
     type: EXERCISE_TYPES.SENTENCE_GAP,
     question: `Fill in the gap with the past simple form of "${verb.infinitive}":`,
-    sentence: template.text,
-    correctAnswer: correctAnswer
+    sentence: `Yesterday, I ___ something.`,
+    correctAnswer: verb.past
   };
 }
 

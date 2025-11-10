@@ -1,7 +1,33 @@
 // ui.js - Manages DOM updates and rendering
 
 /**
- * Get star color based on level
+ * Get star image path based on level and state
+ * @param {number} level - Star level (0-5)
+ * @param {string} state - Star state (active, frozen, broken)
+ * @returns {string} Path to star image
+ */
+function getStarImage(level, state) {
+  if (state === 'broken') {
+    return 'assets/images/star_broken_384.png';
+  }
+  
+  const colorMap = {
+    0: 'neutral',
+    1: 'yellow',
+    2: 'rosa',     // pink
+    3: 'blue',
+    4: 'purple',
+    5: 'orange'    // golden/orange for max level
+  };
+  
+  const color = colorMap[level] || 'neutral';
+  const frozen = (state === 'frozen') ? '_frozen' : '';
+  
+  return `assets/images/star_${color}_384${frozen}.png`;
+}
+
+/**
+ * Get star color based on level (for summary display)
  * @param {number} level - Star level (0-5)
  * @returns {string} Color name
  */
@@ -59,17 +85,18 @@ export function renderStarSummary(summary) {
 /**
  * Render current star for active verb
  * @param {Object} verbState - State of current verb
+ * @param {string} infinitive - Infinitive form of the verb
  */
-export function renderCurrentStar(verbState) {
+export function renderCurrentStar(verbState, infinitive) {
   const container = document.getElementById('current-star');
-  const color = getStarColor(verbState.level);
-  const starSymbol = verbState.level === 0 ? '☆' : '★';
+  const starImage = getStarImage(verbState.level, verbState.state);
   const frozenClass = verbState.state === 'frozen' ? 'frozen' : '';
   const brokenClass = verbState.state === 'broken' ? 'broken' : '';
   
   container.innerHTML = `
     <div class="current-star-display ${frozenClass} ${brokenClass}">
-      <span class="star-icon ${color}">${starSymbol}</span>
+      <div class="current-word">${infinitive}</div>
+      <img src="${starImage}" alt="Star" class="star-image" />
     </div>
   `;
   
@@ -149,7 +176,7 @@ export function clearFeedback() {
  * @param {boolean} isCorrect - Whether to play correct or wrong sound
  */
 export function playSound(isCorrect) {
-  const sound = new Audio(isCorrect ? 'sounds/correct.mp3' : 'sounds/wrong.mp3');
+  const sound = new Audio(isCorrect ? 'assets/sounds/correct.mp3' : 'assets/sounds/wrong.mp3');
   sound.play().catch(e => console.log('Sound play failed:', e));
 }
 

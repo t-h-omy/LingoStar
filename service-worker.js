@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lingostar-v1';
+const CACHE_NAME = 'lingostar-v2';
 const urlsToCache = [
   './',
   './index.html',
@@ -7,9 +7,21 @@ const urlsToCache = [
   './js/ui.js',
   './js/storage.js',
   './js/exercises.js',
-  './data/verbs.json',
-  './sounds/correct.mp3',
-  './sounds/wrong.mp3'
+  './lingostar_verbs.json',
+  './assets/sounds/correct.mp3',
+  './assets/sounds/wrong.mp3',
+  './assets/images/star_neutral_384.png',
+  './assets/images/star_yellow_384.png',
+  './assets/images/star_yellow_384_frozen.png',
+  './assets/images/star_rosa_384.png',
+  './assets/images/star_rosa_384_frozen.png',
+  './assets/images/star_blue_384.png',
+  './assets/images/star_blue_384_frozen.png',
+  './assets/images/star_purple_384.png',
+  './assets/images/star_purple_384_frozen.png',
+  './assets/images/star_orange_384.png',
+  './assets/images/star_orange_384_frozen.png',
+  './assets/images/star_broken_384.png'
 ];
 
 self.addEventListener('install', event => {
