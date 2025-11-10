@@ -324,7 +324,7 @@ function setupEventListeners() {
 function handleViewportResize() {
   const viewport = window.visualViewport;
   const input = document.getElementById('answer-input');
-  const okButton = document.getElementById('ok-button');
+  const bottomBar = document.getElementById('bottom-bar');
   
   if (!viewport) return;
   
@@ -333,14 +333,17 @@ function handleViewportResize() {
   const windowHeight = window.innerHeight;
   const keyboardVisible = viewportHeight < windowHeight * 0.75;
   
-  if (keyboardVisible && input) {
-    // Scroll input and button into view
+  if (keyboardVisible && input && !input.disabled) {
+    // Add class to make bottom bar fixed when keyboard is visible
+    bottomBar.classList.add('keyboard-visible');
+    
+    // Scroll input into view smoothly
     setTimeout(() => {
-      const bottomBar = document.getElementById('bottom-bar');
-      if (bottomBar) {
-        bottomBar.scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }
+      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 100);
+  } else {
+    // Remove fixed positioning when keyboard is hidden
+    bottomBar.classList.remove('keyboard-visible');
   }
 }
 

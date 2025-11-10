@@ -375,6 +375,18 @@ body {
   gap: 15px;
   border-top: 2px solid #e0e0e0;
   flex-shrink: 0; /* Prevent bottom bar from shrinking */
+  position: relative; /* Allow for repositioning when keyboard is visible */
+  transition: transform 0.3s ease; /* Smooth transition when keyboard opens/closes */
+}
+
+/* When keyboard is visible, move bottom bar up but keep other content in place */
+#bottom-bar.keyboard-visible {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transform: translateY(0);
 }
 
 #feedback-text {
