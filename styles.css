@@ -425,8 +425,8 @@ body {
 
 /* Compact inline OK button */
 .ok-button-inline {
-  padding: 15px 30px;
-  min-width: 70px;
+  padding: 15px 20px;
+  min-width: 60px;
   font-size: 18px;
   font-family: inherit;
   font-weight: bold;
@@ -582,7 +582,11 @@ body {
   
   .answer-input {
     font-size: 18px;
-    padding: 12px 20px 12px 50px; /* Adjusted for icon */
+    padding: 12px 15px 12px 50px; /* Adjusted for icon */
+  }
+  
+  .input-container {
+    max-width: none; /* Remove max-width constraint on mobile */
   }
   
   .input-icon {
@@ -591,14 +595,14 @@ body {
   }
   
   .ok-button-inline {
-    padding: 12px 20px;
-    min-width: 60px;
+    padding: 10px 12px;
+    min-width: 50px;
     font-size: 16px;
   }
   
   .input-row, .option-container {
     max-width: 100%;
-    gap: 8px;
+    gap: 6px;
   }
   
   #bottom-bar {
