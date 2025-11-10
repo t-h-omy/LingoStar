@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LingoStar - Learn English irregular verbs in a fun way!">
+    <meta name="theme-color" content="#6B46C1">
+    <title>LingoStar - Learn Irregular Verbs</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <div class="header">
+                <h1 class="app-title">⭐ LingoStar ⭐</h1>
+                <p class="subtitle">Learn Irregular Verbs!</p>
+            </div>
+            
+            <div class="progress-summary">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-stars">0</div>
+                    <div class="stat-label">Stars Earned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="words-mastered">0</div>
+                    <div class="stat-label">Words Mastered</div>
+                </div>
+            </div>
+
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="showExercise('multiple-choice')">
+                    <span class="btn-icon">🎯</span>
+                    <span class="btn-text">Multiple Choice</span>
+                </button>
+                <button class="menu-btn" onclick="showExercise('input')">
+                    <span class="btn-icon">✏️</span>
+                    <span class="btn-text">Type the Answer</span>
+                </button>
+                <button class="menu-btn" onclick="showExercise('translation')">
+                    <span class="btn-icon">🌍</span>
+                    <span class="btn-text">Translation</span>
+                </button>
+                <button class="menu-btn" onclick="showExercise('gap')">
+                    <span class="btn-icon">📝</span>
+                    <span class="btn-text">Fill the Gap</span>
+                </button>
+                <button class="menu-btn secondary" onclick="showProgress()">
+                    <span class="btn-icon">📊</span>
+                    <span class="btn-text">My Progress</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Exercise Screen -->
+        <div id="exercise-screen" class="screen">
+            <div class="exercise-header">
+                <button class="back-btn" onclick="goHome()">← Back</button>
+                <div class="score-display">
+                    Score: <span id="current-score">0</span>
+                </div>
+            </div>
+
+            <div class="word-card">
+                <div class="verb-display">
+                    <span id="current-verb"></span>
+                </div>
+                <div class="star-display" id="star-display"></div>
+            </div>
+
+            <div class="question-area">
+                <div id="question-text" class="question"></div>
+                <div id="answer-area"></div>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <div class="button-area">
+                <button id="check-btn" class="action-btn" onclick="checkAnswer()">Check</button>
+                <button id="next-btn" class="action-btn" onclick="nextQuestion()" style="display: none;">Next</button>
+            </div>
+        </div>
+
+        <!-- Progress Screen -->
+        <div id="progress-screen" class="screen">
+            <div class="exercise-header">
+                <button class="back-btn" onclick="goHome()">← Back</button>
+                <h2 style="margin: 0;">My Progress</h2>
+            </div>
+
+            <div class="progress-content">
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="star-icon outline">☆</span> Not Started
+                    </div>
+                    <div class="legend-item">
+                        <span class="star-icon yellow">⭐</span> 1 Star
+                    </div>
+                    <div class="legend-item">
+                        <span class="star-icon pink">⭐</span> 2 Stars
+                    </div>
+                    <div class="legend-item">
+                        <span class="star-icon blue">⭐</span> 3 Stars
+                    </div>
+                    <div class="legend-item">
+                        <span class="star-icon purple">⭐</span> 4 Stars
+                    </div>
+                    <div class="legend-item">
+                        <span class="star-icon gold">⭐</span> Mastered!
+                    </div>
+                </div>
+
+                <div id="word-list" class="word-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
