@@ -165,6 +165,7 @@ function generateInputField(verb) {
     return {
       type: EXERCISE_TYPES.INPUT_FIELD,
       question: exercise.question,
+      targetWord: verb.infinitive,
       correctAnswer: exercise.answer
     };
   }
@@ -173,6 +174,7 @@ function generateInputField(verb) {
   return {
     type: EXERCISE_TYPES.INPUT_FIELD,
     question: `Type the past simple form of "${verb.infinitive}":`,
+    targetWord: verb.infinitive,
     correctAnswer: verb.past
   };
 }
@@ -186,9 +188,14 @@ function generateTranslation(verb) {
   // Use exercise data from JSON if available
   if (verb.exercises && verb.exercises.translation) {
     const exercise = verb.exercises.translation;
+    // Extract the German sentence from the question
+    const match = exercise.question.match(/'([^']+)'/);
+    const germanSentence = match ? match[1] : '';
+    
     return {
       type: EXERCISE_TYPES.TRANSLATION,
       question: exercise.question,
+      targetSentence: germanSentence,
       correctAnswer: exercise.answer
     };
   }
@@ -197,6 +204,7 @@ function generateTranslation(verb) {
   return {
     type: EXERCISE_TYPES.TRANSLATION,
     question: `Translate the past form of "${verb.infinitive}" (German: ${verb.translation})`,
+    targetSentence: verb.translation,
     correctAnswer: verb.past
   };
 }

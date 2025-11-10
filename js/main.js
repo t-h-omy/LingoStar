@@ -388,6 +388,7 @@ function setupEventListeners() {
 function handleViewportResize() {
   const viewport = window.visualViewport;
   const input = document.getElementById('answer-input');
+  const okButton = document.getElementById('ok-button');
   const bottomBar = document.getElementById('bottom-bar');
   
   if (!viewport) return;
@@ -398,16 +399,20 @@ function handleViewportResize() {
   const keyboardVisible = viewportHeight < windowHeight * 0.75;
   
   if (keyboardVisible && input && !input.disabled) {
-    // Add class to make bottom bar fixed when keyboard is visible
-    bottomBar.classList.add('keyboard-visible');
+    // Calculate the keyboard height
+    const keyboardHeight = windowHeight - viewportHeight;
     
-    // Scroll input into view smoothly
-    setTimeout(() => {
-      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 100);
+    // Move only the OK button above the keyboard
+    okButton.classList.add('keyboard-visible');
+    okButton.style.bottom = `${keyboardHeight + 20}px`; // 20px padding above keyboard
+    
+    // Keep bottom bar in place but hide it or make it transparent
+    bottomBar.classList.add('keyboard-active');
   } else {
-    // Remove fixed positioning when keyboard is hidden
-    bottomBar.classList.remove('keyboard-visible');
+    // Reset to normal position when keyboard is hidden
+    okButton.classList.remove('keyboard-visible');
+    okButton.style.bottom = '';
+    bottomBar.classList.remove('keyboard-active');
   }
 }
 
@@ -415,7 +420,7 @@ function handleViewportResize() {
  * Handle viewport scroll (additional keyboard handling)
  */
 function handleViewportScroll() {
-  // Ensure input stays visible when viewport scrolls
+  // Ensure button stays in correct position when viewport scrolls
   handleViewportResize();
 }
 

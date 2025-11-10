@@ -288,6 +288,27 @@ body {
   line-height: 1.5;
 }
 
+.instruction {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.target-word {
+  font-size: 32px;
+  font-weight: bold;
+  color: #667eea;
+  margin-top: 10px;
+}
+
+.target-sentence {
+  font-size: 24px;
+  font-weight: 600;
+  color: #667eea;
+  margin-top: 10px;
+  font-style: italic;
+}
+
 .hint {
   font-size: 16px;
   color: #666;
@@ -390,18 +411,17 @@ body {
   gap: 15px;
   border-top: 2px solid #e0e0e0;
   flex-shrink: 0; /* Prevent bottom bar from shrinking */
-  position: relative; /* Allow for repositioning when keyboard is visible */
-  transition: transform 0.3s ease; /* Smooth transition when keyboard opens/closes */
+  position: relative;
+}
+
+/* When keyboard is active, keep bottom bar in place */
+#bottom-bar.keyboard-active {
+  /* Bottom bar stays in its normal position */
 }
 
 /* When keyboard is visible, move bottom bar up but keep other content in place */
 #bottom-bar.keyboard-visible {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  transform: translateY(0);
+  /* Deprecated - kept for backwards compatibility */
 }
 
 #feedback-text {
@@ -446,6 +466,16 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+  position: relative;
+}
+
+/* OK button when keyboard is visible - moves above keyboard */
+#ok-button.keyboard-visible {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  transition: bottom 0.3s ease, transform 0.3s ease;
 }
 
 #ok-button:hover {
@@ -453,8 +483,16 @@ body {
   box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
 }
 
+#ok-button.keyboard-visible:hover {
+  transform: translateX(-50%) translateY(-3px);
+}
+
 #ok-button:active {
   transform: translateY(-1px);
+}
+
+#ok-button.keyboard-visible:active {
+  transform: translateX(-50%) translateY(-1px);
 }
 
 /* Responsive Design */
@@ -842,19 +880,42 @@ body {
 /* Dictionary Modal */
 .dictionary-content {
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  max-height: 80vh;
 }
 
-.dictionary-content h2 {
-  margin: 0 0 20px 0;
+.dictionary-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+  padding: 30px 30px 20px 30px;
+  border-bottom: 2px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dictionary-header h2 {
+  margin: 0;
   color: #333;
   font-size: 28px;
-  text-align: center;
+}
+
+.dictionary-header .modal-close {
+  position: static;
+  margin: 0;
 }
 
 .dictionary-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 20px 30px 30px 30px;
+  overflow-y: auto;
+  flex: 1;
 }
 
 .dictionary-item {

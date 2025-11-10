@@ -142,7 +142,26 @@ export function renderExercise(exercise) {
   const questionEl = document.getElementById('question-text');
   const answerEl = document.getElementById('answer-area');
   
-  questionEl.textContent = exercise.question;
+  // Clear previous content
+  questionEl.innerHTML = '';
+  
+  // For input_field and translation exercises, format with instruction and target on separate lines
+  if (exercise.type === 'input_field' && exercise.targetWord) {
+    const instructionText = exercise.question.replace(`"${exercise.targetWord}"`, '').replace(/:\s*$/, '');
+    questionEl.innerHTML = `
+      <div class="instruction">${instructionText.trim()}:</div>
+      <div class="target-word">'${exercise.targetWord}'</div>
+    `;
+  } else if (exercise.type === 'translation' && exercise.targetSentence) {
+    const instructionMatch = exercise.question.match(/^([^:]+):/);
+    const instruction = instructionMatch ? instructionMatch[1] : 'Translate and write the sentence in simple past';
+    questionEl.innerHTML = `
+      <div class="instruction">${instruction}:</div>
+      <div class="target-sentence">'${exercise.targetSentence}'</div>
+    `;
+  } else {
+    questionEl.textContent = exercise.question;
+  }
   
   if (exercise.hint) {
     questionEl.innerHTML += `<div class="hint">${exercise.hint}</div>`;
