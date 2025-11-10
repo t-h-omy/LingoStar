@@ -1,0 +1,102 @@
+[
+  {
+    "infinitive": "be",
+    "past": "was/were",
+    "translation": "sein"
+  },
+  {
+    "infinitive": "have",
+    "past": "had",
+    "translation": "haben"
+  },
+  {
+    "infinitive": "do",
+    "past": "did",
+    "translation": "tun, machen"
+  },
+  {
+    "infinitive": "go",
+    "past": "went",
+    "translation": "gehen"
+  },
+  {
+    "infinitive": "get",
+    "past": "got",
+    "translation": "bekommen, werden"
+  },
+  {
+    "infinitive": "make",
+    "past": "made",
+    "translation": "machen"
+  },
+  {
+    "infinitive": "see",
+    "past": "saw",
+    "translation": "sehen"
+  },
+  {
+    "infinitive": "come",
+    "past": "came",
+    "translation": "kommen"
+  },
+  {
+    "infinitive": "take",
+    "past": "took",
+    "translation": "nehmen"
+  },
+  {
+    "infinitive": "know",
+    "past": "knew",
+    "translation": "wissen, kennen"
+  },
+  {
+    "infinitive": "think",
+    "past": "thought",
+    "translation": "denken"
+  },
+  {
+    "infinitive": "give",
+    "past": "gave",
+    "translation": "geben"
+  },
+  {
+    "infinitive": "find",
+    "past": "found",
+    "translation": "finden"
+  },
+  {
+    "infinitive": "tell",
+    "past": "told",
+    "translation": "erzählen, sagen"
+  },
+  {
+    "infinitive": "say",
+    "past": "said",
+    "translation": "sagen"
+  },
+  {
+    "infinitive": "write",
+    "past": "wrote",
+    "translation": "schreiben"
+  },
+  {
+    "infinitive": "read",
+    "past": "read",
+    "translation": "lesen"
+  },
+  {
+    "infinitive": "eat",
+    "past": "ate",
+    "translation": "essen"
+  },
+  {
+    "infinitive": "drink",
+    "past": "drank",
+    "translation": "trinken"
+  },
+  {
+    "infinitive": "run",
+    "past": "ran",
+    "translation": "rennen, laufen"
+  }
+]
