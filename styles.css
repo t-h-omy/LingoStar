@@ -425,10 +425,11 @@ body {
 
 /* Compact inline OK button */
 .ok-button-inline {
-  padding: 12px 16px;
-  min-width: 50px;
-  max-width: 80px;
-  font-size: 16px;
+  padding: 14px 24px;
+  width: 90px;
+  min-width: 90px;
+  max-width: 90px;
+  font-size: 17px;
   font-family: inherit;
   font-weight: bold;
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -596,10 +597,11 @@ body {
   }
   
   .ok-button-inline {
-    padding: 8px 10px;
-    min-width: 45px;
-    max-width: 65px;
-    font-size: 14px;
+    padding: 10px 12px;
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+    font-size: 15px;
   }
   
   .input-row, .option-container {
