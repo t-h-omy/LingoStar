@@ -205,6 +205,39 @@ body {
   }
 }
 
+@keyframes starUnfreeze {
+  0% {
+    opacity: 0.6;
+    filter: blur(2px);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(1px);
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes starRecover {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.8) rotate(-10deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.15) rotate(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
 .star-appear {
   animation: starAppear 0.5s ease;
 }
@@ -223,6 +256,14 @@ body {
 
 .star-reset {
   animation: starReset 0.6s ease;
+}
+
+.star-unfreeze {
+  animation: starUnfreeze 0.6s ease;
+}
+
+.star-recover {
+  animation: starRecover 0.6s ease;
 }
 
 /* Exercise Container */

@@ -148,7 +148,7 @@ function handleSubmitAnswer() {
   
   // Update verb state
   const oldState = JSON.parse(JSON.stringify(storage.getVerbState(progress, currentVerb.infinitive)));
-  storage.updateVerbState(progress, currentVerb.infinitive, isCorrect);
+  const shouldRepeat = storage.updateVerbState(progress, currentVerb.infinitive, isCorrect);
   const newState = storage.getVerbState(progress, currentVerb.infinitive);
   
   // Update UI
@@ -163,9 +163,35 @@ function handleSubmitAnswer() {
   ui.renderCurrentStar(newState, currentVerb.infinitive);
   updateStarSummary();
   
-  // Change button to "Next"
-  ui.setOkButton('Next', handleSubmitAnswer);
+  // If frozen star behavior triggered, we need to repeat the same exercise
+  if (shouldRepeat) {
+    // Change button to "Try Again" and repeat same exercise
+    ui.setOkButton('Try Again', handleRetryExercise);
+  } else {
+    // Change button to "Next"
+    ui.setOkButton('Next', handleSubmitAnswer);
+  }
   awaitingNextExercise = true;
+}
+
+/**
+ * Handle retry of the same exercise (for frozen star behavior)
+ */
+function handleRetryExercise() {
+  awaitingNextExercise = false;
+  ui.clearFeedback();
+  
+  // Generate the same type of exercise for the same verb
+  currentExercise = exercises.generateExercise(currentVerb, currentExercise.type);
+  
+  // Update UI
+  const verbState = storage.getVerbState(progress, currentVerb.infinitive);
+  ui.renderCurrentStar(verbState, currentVerb.infinitive);
+  ui.renderExercise(currentExercise);
+  ui.enableAnswerInput();
+  
+  // Set OK button to submit answer
+  ui.setOkButton('OK', handleSubmitAnswer);
 }
 
 /**
@@ -190,18 +216,25 @@ function getUserAnswer() {
  */
 function animateStateTransition(oldState, newState, isCorrect) {
   if (isCorrect) {
-    if (oldState.state === 'frozen' && newState.state === 'active') {
+    if (oldState.state === 'broken' && newState.state === 'active') {
+      // Broken star recovered to neutral
+      ui.animateStarTransition('recover');
+    } else if (oldState.state === 'frozen' && newState.state === 'active') {
+      // Frozen star unfrozen
       ui.animateStarTransition('unfreeze');
     } else if (newState.level > oldState.level) {
+      // Level up
       ui.animateStarTransition('levelUp');
     }
   } else {
-    if (newState.state === 'broken') {
+    if (oldState.state === 'active' && oldState.level === 0 && newState.state === 'broken') {
+      // Neutral star broke
       ui.animateStarTransition('break');
-    } else if (newState.state === 'frozen') {
+    } else if (oldState.state === 'active' && oldState.level > 0 && newState.state === 'frozen') {
+      // Colored star frozen
       ui.animateStarTransition('freeze');
-    }
-    if (newState.level < oldState.level) {
+    } else if (oldState.state === 'frozen' && newState.state === 'active' && newState.level === 0) {
+      // Frozen star reset to neutral
       ui.animateStarTransition('reset');
     }
   }

@@ -223,14 +223,31 @@ export function generateExercise(verb, type = null) {
 /**
  * Check if an answer is correct
  * @param {string} userAnswer - User's answer
- * @param {string} correctAnswer - Correct answer
+ * @param {string|Array} correctAnswer - Correct answer (string or array of valid answers)
  * @returns {boolean} Whether the answer is correct
  */
 export function checkAnswer(userAnswer, correctAnswer) {
   const normalize = (str) => str.toLowerCase().trim();
   const normalizedUser = normalize(userAnswer);
-  const normalizedCorrect = normalize(correctAnswer);
   
+  // Handle array of correct answers (new feature)
+  if (Array.isArray(correctAnswer)) {
+    // Check if user's answer matches any item in the array (case-insensitive)
+    return correctAnswer.some(answer => checkSingleAnswer(normalizedUser, normalize(answer)));
+  }
+  
+  // Handle single answer (backward compatibility)
+  const normalizedCorrect = normalize(correctAnswer);
+  return checkSingleAnswer(normalizedUser, normalizedCorrect);
+}
+
+/**
+ * Check if user answer matches a single correct answer
+ * @param {string} normalizedUser - Normalized user answer
+ * @param {string} normalizedCorrect - Normalized correct answer
+ * @returns {boolean} Whether the answer matches
+ */
+function checkSingleAnswer(normalizedUser, normalizedCorrect) {
   // Exact match
   if (normalizedUser === normalizedCorrect) {
     return true;
@@ -247,7 +264,7 @@ export function checkAnswer(userAnswer, correctAnswer) {
   
   // Handle alternatives separated by "/" (e.g., "was/were")
   if (normalizedCorrect.includes('/')) {
-    const alternatives = normalizedCorrect.split('/').map(alt => normalize(alt));
+    const alternatives = normalizedCorrect.split('/').map(alt => alt.trim());
     if (alternatives.includes(normalizedUser)) {
       return true;
     }
