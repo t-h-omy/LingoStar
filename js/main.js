@@ -12,6 +12,7 @@ let awaitingNextExercise = false;
 let exerciseCount = 0;
 let deferredPrompt = null;
 let soundEnabled = true; // Sound setting
+let okButtonHandler = null; // Track the current OK button handler
 
 /**
  * Initialize the app
@@ -121,32 +122,56 @@ function setupPWAInstallPrompt() {
     // Store the event for later use
     deferredPrompt = e;
     console.log('Install prompt available');
+    
+    // Show prompt after a short delay if not already shown this session
+    setTimeout(() => {
+      maybeShowInstallPrompt();
+    }, 2000);
   });
   
   // Listen for app installed event
   window.addEventListener('appinstalled', () => {
     console.log('PWA installed successfully');
     deferredPrompt = null;
+    sessionStorage.setItem('lingostar_install_prompt_shown', 'true');
   });
 }
 
 /**
- * Show PWA install prompt after several exercises
+ * Show PWA install prompt
  */
 function maybeShowInstallPrompt() {
-  // Show after 10 exercises, if not already installed and prompt is available
-  if (exerciseCount === 10 && deferredPrompt && !window.matchMedia('(display-mode: standalone)').matches) {
-    const installPrompt = confirm('Add LingoStar to your home screen for quick access?');
-    
-    if (installPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
-        }
-        deferredPrompt = null;
-      });
-    }
+  // Don't show if already shown this session
+  if (sessionStorage.getItem('lingostar_install_prompt_shown')) {
+    return;
+  }
+  
+  // Don't show if already installed
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    return;
+  }
+  
+  // Don't show if prompt not available
+  if (!deferredPrompt) {
+    return;
+  }
+  
+  // Mark as shown for this session
+  sessionStorage.setItem('lingostar_install_prompt_shown', 'true');
+  
+  // Show the prompt
+  const installPrompt = confirm('Install LingoStar as an App?\n\nAdd LingoStar to your home screen for quick access and offline use.');
+  
+  if (installPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    deferredPrompt = null;
   }
 }
 
@@ -169,9 +194,6 @@ function startNewExercise() {
   // Increment exercise count
   exerciseCount++;
   
-  // Maybe show install prompt
-  maybeShowInstallPrompt();
-  
   // Select verb and generate exercise
   currentVerb = exercises.selectVerb(progress);
   currentExercise = exercises.generateExercise(currentVerb);
@@ -183,6 +205,7 @@ function startNewExercise() {
   ui.enableAnswerInput();
   
   // Set OK button to submit answer
+  okButtonHandler = handleSubmitAnswer;
   ui.setOkButton('OK', handleSubmitAnswer);
 }
 
@@ -228,9 +251,11 @@ function handleSubmitAnswer() {
   // If frozen star behavior triggered, we need to repeat the same exercise
   if (shouldRepeat) {
     // Change button to "Try Again" and repeat same exercise
+    okButtonHandler = handleRetryExercise;
     ui.setOkButton('Try Again', handleRetryExercise);
   } else {
     // Change button to "Next"
+    okButtonHandler = handleSubmitAnswer;
     ui.setOkButton('Next', handleSubmitAnswer);
   }
   awaitingNextExercise = true;
@@ -253,6 +278,7 @@ function handleRetryExercise() {
   ui.enableAnswerInput();
   
   // Set OK button to submit answer
+  okButtonHandler = handleSubmitAnswer;
   ui.setOkButton('OK', handleSubmitAnswer);
 }
 
@@ -366,7 +392,10 @@ function setupEventListeners() {
   // Delegate click for dynamically created OK buttons
   document.addEventListener('click', (e) => {
     if (e.target.id === 'ok-button' || e.target.classList.contains('ok-button-inline')) {
-      handleSubmitAnswer();
+      // Call the current handler function
+      if (okButtonHandler) {
+        okButtonHandler();
+      }
     }
   });
   
@@ -389,9 +418,9 @@ function setupEventListeners() {
       }
       
       // Trigger OK button
-      if (okButton) {
+      if (okButton && okButtonHandler) {
         e.preventDefault();
-        okButton.click();
+        okButtonHandler();
       }
     }
   });
