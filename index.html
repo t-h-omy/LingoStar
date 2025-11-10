@@ -26,6 +26,9 @@
 </head>
 <body>
     <div id="app">
+        <!-- Burger Menu Icon -->
+        <button id="burger-menu-icon" aria-label="Open menu">☰</button>
+        
         <!-- Top: Current Word and Star (Prominent Header) -->
         <div id="top-bar">
             <div id="current-star"></div>
@@ -36,21 +39,74 @@
         <div id="exercise-container">
             <div id="question-text"></div>
             <div id="answer-area"></div>
+            <div id="inline-ok-container"></div>
         </div>
 
-        <!-- Bottom: Feedback and Button -->
+        <!-- Bottom: Feedback -->
         <div id="bottom-bar">
             <div id="feedback-text"></div>
-            <button id="ok-button">OK</button>
         </div>
     </div>
 
     <!-- Version indicator -->
-    <div id="version">v1.2.0</div>
+    <div id="version">v1.3.5</div>
     
     <!-- Update notification -->
     <div id="update-notification" style="display: none;">
         <button id="update-button">New Version Available</button>
+    </div>
+
+    <!-- Burger Menu Modal -->
+    <div id="burger-menu" class="burger-menu" style="display: none;">
+        <div class="burger-menu-content">
+            <button id="burger-menu-close" class="burger-menu-close" aria-label="Close menu">✕</button>
+            
+            <h2>Settings</h2>
+            
+            <!-- Sound Toggle -->
+            <div class="menu-item">
+                <label class="menu-label">Sound</label>
+                <button id="sound-toggle" class="toggle-switch" aria-label="Toggle sound">
+                    <span class="toggle-icon">🔊</span>
+                </button>
+            </div>
+            
+            <!-- Dictionary -->
+            <div class="menu-item">
+                <button id="dictionary-button" class="menu-button">
+                    📖 Dictionary
+                </button>
+            </div>
+            
+            <!-- Delete Save Game -->
+            <div class="menu-item">
+                <button id="delete-save-button" class="menu-button danger">
+                    🗑️ Delete Save Game
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dictionary Modal -->
+    <div id="dictionary-modal" class="modal" style="display: none;">
+        <div class="modal-content dictionary-content">
+            <div class="dictionary-header">
+                <h2>Dictionary</h2>
+                <button id="dictionary-close" class="modal-close" aria-label="Close dictionary">✕</button>
+            </div>
+            <div id="dictionary-list" class="dictionary-list"></div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal" style="display: none;">
+        <div class="modal-content confirmation-content">
+            <h3 id="confirmation-message">Are you sure?</h3>
+            <div class="confirmation-buttons">
+                <button id="confirmation-cancel" class="modal-button">Cancel</button>
+                <button id="confirmation-confirm" class="modal-button danger">Delete</button>
+            </div>
+        </div>
     </div>
 
     <script type="module" src="js/main.js"></script>

@@ -120,14 +120,50 @@ export function renderCurrentStar(verbState, infinitive) {
 }
 
 /**
+ * Get task type icon based on exercise type
+ * @param {string} exerciseType - Type of exercise
+ * @returns {string} Icon emoji
+ */
+function getTaskIcon(exerciseType) {
+  const icons = {
+    'input_field': '✏️',
+    'translation': '🌍',
+    'sentence_gap': '💬',
+    'multiple_choice': '🎯'
+  };
+  return icons[exerciseType] || '✏️';
+}
+
+/**
  * Render exercise question and answer area
  * @param {Object} exercise - Exercise data
  */
 export function renderExercise(exercise) {
   const questionEl = document.getElementById('question-text');
   const answerEl = document.getElementById('answer-area');
+  const inlineOkContainer = document.getElementById('inline-ok-container');
   
-  questionEl.textContent = exercise.question;
+  // Clear previous content
+  questionEl.innerHTML = '';
+  inlineOkContainer.innerHTML = '';
+  
+  // For input_field and translation exercises, format with instruction and target on separate lines
+  if (exercise.type === 'input_field' && exercise.targetWord) {
+    const instructionText = exercise.question.replace(`"${exercise.targetWord}"`, '').replace(/:\s*$/, '');
+    questionEl.innerHTML = `
+      <div class="instruction">${instructionText.trim()}:</div>
+      <div class="target-word">'${exercise.targetWord}'</div>
+    `;
+  } else if (exercise.type === 'translation' && exercise.targetSentence) {
+    const instructionMatch = exercise.question.match(/^([^:]+):/);
+    const instruction = instructionMatch ? instructionMatch[1] : 'Translate and write the sentence in simple past';
+    questionEl.innerHTML = `
+      <div class="instruction">${instruction}:</div>
+      <div class="target-sentence">'${exercise.targetSentence}'</div>
+    `;
+  } else {
+    questionEl.textContent = exercise.question;
+  }
   
   if (exercise.hint) {
     questionEl.innerHTML += `<div class="hint">${exercise.hint}</div>`;
@@ -141,19 +177,49 @@ export function renderExercise(exercise) {
   
   if (exercise.type === 'multiple_choice') {
     exercise.options.forEach(option => {
+      const optionContainer = document.createElement('div');
+      optionContainer.className = 'option-container';
+      
       const button = document.createElement('button');
       button.className = 'option-button';
       button.textContent = option;
       button.dataset.answer = option;
-      answerEl.appendChild(button);
+      
+      optionContainer.appendChild(button);
+      answerEl.appendChild(optionContainer);
     });
   } else {
+    // Create a container for input with icon and inline OK button
+    const inputRow = document.createElement('div');
+    inputRow.className = 'input-row';
+    
+    const inputContainer = document.createElement('div');
+    inputContainer.className = 'input-container';
+    
+    // Add icon
+    const icon = document.createElement('span');
+    icon.className = 'input-icon';
+    icon.textContent = getTaskIcon(exercise.type);
+    inputContainer.appendChild(icon);
+    
+    // Add input field
     const input = document.createElement('input');
     input.type = 'text';
     input.id = 'answer-input';
     input.className = 'answer-input';
     input.placeholder = 'Type your answer here...';
-    answerEl.appendChild(input);
+    inputContainer.appendChild(input);
+    
+    // Add inline OK button
+    const okButton = document.createElement('button');
+    okButton.id = 'ok-button';
+    okButton.className = 'ok-button-inline';
+    okButton.textContent = 'OK';
+    
+    inputRow.appendChild(inputContainer);
+    inputRow.appendChild(okButton);
+    
+    answerEl.appendChild(inputRow);
   }
 }
 
@@ -243,10 +309,30 @@ export function enableAnswerInput() {
 /**
  * Set OK button state
  * @param {string} text - Button text
- * @param {Function} onClick - Click handler
+ * @param {Function} onClick - Click handler (no longer used, handled by event delegation)
  */
 export function setOkButton(text, onClick) {
   const button = document.getElementById('ok-button');
-  button.textContent = text;
-  button.onclick = onClick;
+  if (button) {
+    button.textContent = text;
+  }
+}
+
+/**
+ * Get star display for dictionary (emoji representation)
+ * @param {Object} verbState - State of the verb
+ * @returns {string} Star emoji
+ */
+export function getStarDisplayForDictionary(verbState) {
+  if (verbState.state === 'broken') {
+    return '💔'; // Broken heart/star
+  } else if (verbState.state === 'frozen') {
+    return '❄️'; // Frozen
+  } else if (verbState.level === 0) {
+    return '☆'; // Outline star
+  } else {
+    // Colored stars based on level
+    const colors = ['', '⭐', '💗', '💙', '💜', '🌟'];
+    return colors[verbState.level] || '☆';
+  }
 }

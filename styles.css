@@ -288,6 +288,27 @@ body {
   line-height: 1.5;
 }
 
+.instruction {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.target-word {
+  font-size: 32px;
+  font-weight: bold;
+  color: #667eea;
+  margin-top: 10px;
+}
+
+.target-sentence {
+  font-size: 24px;
+  font-weight: 600;
+  color: #667eea;
+  margin-top: 10px;
+  font-style: italic;
+}
+
 .hint {
   font-size: 16px;
   color: #666;
@@ -312,40 +333,34 @@ body {
   align-items: center;
 }
 
-.option-button {
+.input-row {
   width: 100%;
-  max-width: 400px;
-  padding: 15px 25px;
-  font-size: 18px;
-  font-family: inherit;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
 }
 
-.option-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+.input-container {
+  position: relative;
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
 }
 
-.option-button.selected {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  transform: scale(1.05);
-}
-
-.option-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.input-icon {
+  position: absolute;
+  left: 15px;
+  font-size: 24px;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .answer-input {
   width: 100%;
-  max-width: 400px;
-  padding: 15px 25px;
+  padding: 15px 25px 15px 55px; /* Extra left padding for icon */
   font-size: 20px;
   font-family: inherit;
   border: 3px solid #667eea;
@@ -364,6 +379,78 @@ body {
   background: #f0f0f0;
 }
 
+.option-container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.option-button {
+  flex: 1;
+  max-width: 500px;
+  padding: 15px 25px;
+  font-size: 18px;
+  font-family: inherit;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.option-button.with-ok-button {
+  max-width: 480px;
+}
+
+.option-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.option-button.selected {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  transform: scale(1.02);
+}
+
+.option-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Compact inline OK button */
+.ok-button-inline {
+  padding: 14px 24px;
+  width: 90px;
+  min-width: 90px;
+  max-width: 90px;
+  font-size: 17px;
+  font-family: inherit;
+  font-weight: bold;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+  flex-shrink: 0;
+}
+
+.ok-button-inline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+}
+
+.ok-button-inline:active {
+  transform: translateY(0);
+}
+
 /* Bottom Bar */
 #bottom-bar {
   padding: 20px;
@@ -375,18 +462,18 @@ body {
   gap: 15px;
   border-top: 2px solid #e0e0e0;
   flex-shrink: 0; /* Prevent bottom bar from shrinking */
-  position: relative; /* Allow for repositioning when keyboard is visible */
-  transition: transform 0.3s ease; /* Smooth transition when keyboard opens/closes */
+  position: relative;
+  min-height: 70px; /* Ensure consistent height even without button */
+}
+
+/* When keyboard is active, keep bottom bar in place */
+#bottom-bar.keyboard-active {
+  /* Bottom bar stays in its normal position */
 }
 
 /* When keyboard is visible, move bottom bar up but keep other content in place */
 #bottom-bar.keyboard-visible {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  transform: translateY(0);
+  /* Deprecated - kept for backwards compatibility */
 }
 
 #feedback-text {
@@ -417,29 +504,6 @@ body {
 
 .feedback-appear {
   animation: feedbackAppear 0.3s ease;
-}
-
-#ok-button {
-  padding: 15px 60px;
-  font-size: 20px;
-  font-family: inherit;
-  font-weight: bold;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
-}
-
-#ok-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
-}
-
-#ok-button:active {
-  transform: translateY(-1px);
 }
 
 /* Responsive Design */
@@ -514,9 +578,35 @@ body {
     padding: 12px 20px;
   }
   
+  .option-button.with-ok-button {
+    max-width: calc(100% - 80px);
+  }
+  
   .answer-input {
     font-size: 18px;
-    padding: 12px 20px;
+    padding: 12px 15px 12px 50px; /* Adjusted for icon */
+  }
+  
+  .input-container {
+    max-width: none; /* Remove max-width constraint on mobile */
+  }
+  
+  .input-icon {
+    left: 12px;
+    font-size: 20px;
+  }
+  
+  .ok-button-inline {
+    padding: 10px 12px !important;
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    font-size: 15px !important;
+  }
+  
+  .input-row, .option-container {
+    max-width: 100%;
+    gap: 6px;
   }
   
   #bottom-bar {
@@ -593,6 +683,360 @@ body {
 
 #update-button:active {
   transform: translateY(0);
+}
+
+/* Burger Menu Icon */
+#burger-menu-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  font-size: 28px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #667eea;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+#burger-menu-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+#burger-menu-icon:active {
+  transform: scale(0.95);
+}
+
+/* Burger Menu Modal */
+.burger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.burger-menu-content {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.burger-menu-content h2 {
+  margin: 0 0 25px 0;
+  color: #333;
+  font-size: 28px;
+  text-align: center;
+}
+
+.burger-menu-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.burger-menu-close:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.menu-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-label {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.toggle-switch {
+  width: 80px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.on {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+.toggle-switch.off {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+}
+
+.toggle-icon {
+  transition: transform 0.3s ease;
+}
+
+.menu-button {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 20px;
+  font-family: inherit;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.menu-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.menu-button.danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+}
+
+/* Modals */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideDown 0.3s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* Dictionary Modal */
+.dictionary-content {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  max-height: 80vh;
+}
+
+.dictionary-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+  padding: 30px 30px 20px 30px;
+  border-bottom: 2px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dictionary-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 28px;
+}
+
+.dictionary-header .modal-close {
+  position: static;
+  margin: 0;
+}
+
+.dictionary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 30px 30px 30px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.dictionary-item {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 15px;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.dictionary-item:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.dictionary-star {
+  font-size: 28px;
+}
+
+.dictionary-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dictionary-infinitive {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.dictionary-past {
+  font-size: 16px;
+  color: #666;
+}
+
+.dictionary-translation {
+  font-size: 14px;
+  color: #999;
+  font-style: italic;
+}
+
+/* Confirmation Modal */
+.confirmation-content {
+  max-width: 400px;
+  text-align: center;
+}
+
+.confirmation-content h3 {
+  margin: 0 0 25px 0;
+  color: #333;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.confirmation-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.modal-button {
+  padding: 12px 30px;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-button:not(.danger) {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+  color: white;
+}
+
+.modal-button.danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
 }
 
 /* Special handling for very small screens or when keyboard is visible */

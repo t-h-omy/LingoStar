@@ -11,6 +11,7 @@ let currentExercise = null;
 let awaitingNextExercise = false;
 let exerciseCount = 0;
 let deferredPrompt = null;
+let soundEnabled = true; // Sound setting
 
 /**
  * Initialize the app
@@ -28,6 +29,11 @@ async function init() {
       console.log('Service Worker registration failed:', e);
     }
   }
+  
+  // Load sound setting from localStorage
+  const savedSound = localStorage.getItem('lingostar_sound_enabled');
+  soundEnabled = savedSound === null ? true : savedSound === 'true';
+  updateSoundToggle();
   
   // Load verbs and progress
   const verbs = await exercises.loadVerbs();
@@ -271,6 +277,8 @@ function getUserAnswer() {
  * @param {boolean} isCorrect - Whether answer was correct
  */
 function playSoundForStateChange(oldState, newState, isCorrect) {
+  if (!soundEnabled) return; // Don't play if sound is disabled
+  
   if (isCorrect) {
     if (oldState.state === 'frozen' && newState.state === 'active') {
       // Frozen star unfrozen
@@ -329,12 +337,36 @@ function setupEventListeners() {
   // Multiple choice button selection
   document.getElementById('answer-area').addEventListener('click', (e) => {
     if (e.target.classList.contains('option-button')) {
-      // Deselect all
+      const optionContainer = e.target.parentElement;
+      const answerArea = document.getElementById('answer-area');
+      
+      // Remove previous OK buttons and deselect all
       document.querySelectorAll('.option-button').forEach(btn => {
         btn.classList.remove('selected');
+        const container = btn.parentElement;
+        const existingOk = container.querySelector('.ok-button-inline');
+        if (existingOk) existingOk.remove();
       });
-      // Select clicked
+      
+      // Select clicked option
       e.target.classList.add('selected');
+      
+      // Add inline OK button next to selected option
+      const okButton = document.createElement('button');
+      okButton.id = 'ok-button';
+      okButton.className = 'ok-button-inline';
+      okButton.textContent = 'OK';
+      optionContainer.appendChild(okButton);
+      
+      // Shrink the option button to make room
+      e.target.classList.add('with-ok-button');
+    }
+  });
+  
+  // Delegate click for dynamically created OK buttons
+  document.addEventListener('click', (e) => {
+    if (e.target.id === 'ok-button' || e.target.classList.contains('ok-button-inline')) {
+      handleSubmitAnswer();
     }
   });
   
@@ -369,43 +401,190 @@ function setupEventListeners() {
     window.visualViewport.addEventListener('resize', handleViewportResize);
     window.visualViewport.addEventListener('scroll', handleViewportScroll);
   }
+  
+  // Burger menu
+  setupBurgerMenu();
 }
 
 /**
  * Handle viewport resize (mobile keyboard appearance)
  */
 function handleViewportResize() {
-  const viewport = window.visualViewport;
-  const input = document.getElementById('answer-input');
-  const bottomBar = document.getElementById('bottom-bar');
-  
-  if (!viewport) return;
-  
-  // Check if keyboard is likely visible (viewport height significantly reduced)
-  const viewportHeight = viewport.height;
-  const windowHeight = window.innerHeight;
-  const keyboardVisible = viewportHeight < windowHeight * 0.75;
-  
-  if (keyboardVisible && input && !input.disabled) {
-    // Add class to make bottom bar fixed when keyboard is visible
-    bottomBar.classList.add('keyboard-visible');
-    
-    // Scroll input into view smoothly
-    setTimeout(() => {
-      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 100);
-  } else {
-    // Remove fixed positioning when keyboard is hidden
-    bottomBar.classList.remove('keyboard-visible');
-  }
+  // Since OK button is now inline with the input/options, no special handling needed
+  // The viewport will naturally adjust with the inline button staying in place
 }
 
 /**
  * Handle viewport scroll (additional keyboard handling)
  */
 function handleViewportScroll() {
-  // Ensure input stays visible when viewport scrolls
+  // Ensure button stays in correct position when viewport scrolls
   handleViewportResize();
+}
+
+/**
+ * Set up burger menu event listeners
+ */
+function setupBurgerMenu() {
+  const burgerIcon = document.getElementById('burger-menu-icon');
+  const burgerMenu = document.getElementById('burger-menu');
+  const burgerClose = document.getElementById('burger-menu-close');
+  const soundToggle = document.getElementById('sound-toggle');
+  const dictionaryButton = document.getElementById('dictionary-button');
+  const deleteSaveButton = document.getElementById('delete-save-button');
+  
+  // Open menu
+  burgerIcon.addEventListener('click', () => {
+    burgerMenu.style.display = 'flex';
+  });
+  
+  // Close menu
+  burgerClose.addEventListener('click', () => {
+    burgerMenu.style.display = 'none';
+  });
+  
+  // Close menu when clicking outside
+  burgerMenu.addEventListener('click', (e) => {
+    if (e.target === burgerMenu) {
+      burgerMenu.style.display = 'none';
+    }
+  });
+  
+  // Sound toggle
+  soundToggle.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem('lingostar_sound_enabled', soundEnabled.toString());
+    updateSoundToggle();
+  });
+  
+  // Dictionary
+  dictionaryButton.addEventListener('click', () => {
+    burgerMenu.style.display = 'none';
+    showDictionary();
+  });
+  
+  // Delete save game
+  deleteSaveButton.addEventListener('click', () => {
+    burgerMenu.style.display = 'none';
+    showDeleteConfirmation();
+  });
+}
+
+/**
+ * Update sound toggle UI
+ */
+function updateSoundToggle() {
+  const soundToggle = document.getElementById('sound-toggle');
+  const icon = soundToggle.querySelector('.toggle-icon');
+  
+  if (soundEnabled) {
+    soundToggle.classList.add('on');
+    soundToggle.classList.remove('off');
+    icon.textContent = '🔊';
+  } else {
+    soundToggle.classList.add('off');
+    soundToggle.classList.remove('on');
+    icon.textContent = '🔇';
+  }
+}
+
+/**
+ * Show dictionary modal
+ */
+function showDictionary() {
+  const modal = document.getElementById('dictionary-modal');
+  const closeButton = document.getElementById('dictionary-close');
+  const listContainer = document.getElementById('dictionary-list');
+  
+  // Get all verbs and their states
+  const verbs = exercises.getVerbs();
+  
+  // Sort by infinitive
+  const sortedVerbs = [...verbs].sort((a, b) => a.infinitive.localeCompare(b.infinitive));
+  
+  // Build dictionary list
+  listContainer.innerHTML = sortedVerbs.map(verb => {
+    const state = storage.getVerbState(progress, verb.infinitive);
+    const starDisplay = ui.getStarDisplayForDictionary(state);
+    
+    return `
+      <div class="dictionary-item">
+        <div class="dictionary-star">${starDisplay}</div>
+        <div class="dictionary-info">
+          <div class="dictionary-infinitive">${verb.infinitive}</div>
+          <div class="dictionary-past">${verb.past}</div>
+          <div class="dictionary-translation">${verb.translation}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Show modal
+  modal.style.display = 'flex';
+  
+  // Close button
+  closeButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+  
+  // Close when clicking outside
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+}
+
+/**
+ * Show delete confirmation modal
+ */
+function showDeleteConfirmation() {
+  const modal = document.getElementById('confirmation-modal');
+  const message = document.getElementById('confirmation-message');
+  const cancelButton = document.getElementById('confirmation-cancel');
+  const confirmButton = document.getElementById('confirmation-confirm');
+  
+  message.textContent = 'Are you sure you want to delete your current save game?';
+  
+  // Show modal
+  modal.style.display = 'flex';
+  
+  // Cancel button
+  const cancelHandler = () => {
+    modal.style.display = 'none';
+    cancelButton.removeEventListener('click', cancelHandler);
+    confirmButton.removeEventListener('click', confirmHandler);
+  };
+  
+  // Confirm button
+  const confirmHandler = () => {
+    // Delete all progress
+    localStorage.removeItem('lingostar_progress');
+    progress = {};
+    
+    // Sync verbs (reinitialize)
+    const verbs = exercises.getVerbs();
+    progress = storage.syncNewVerbs(progress, verbs);
+    
+    // Update UI
+    updateStarSummary();
+    startNewExercise();
+    
+    // Close modal
+    modal.style.display = 'none';
+    cancelButton.removeEventListener('click', cancelHandler);
+    confirmButton.removeEventListener('click', confirmHandler);
+  };
+  
+  cancelButton.addEventListener('click', cancelHandler);
+  confirmButton.addEventListener('click', confirmHandler);
+  
+  // Close when clicking outside
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      cancelHandler();
+    }
+  });
 }
 
 // Start the app
