@@ -16,11 +16,14 @@ let deferredPrompt = null;
  * Initialize the app
  */
 async function init() {
-  // Register service worker
+  // Register service worker with update handling
   if ('serviceWorker' in navigator) {
     try {
-      await navigator.serviceWorker.register('./service-worker.js');
+      const registration = await navigator.serviceWorker.register('./service-worker.js');
       console.log('Service Worker registered');
+      
+      // Handle updates
+      setupServiceWorkerUpdateHandler(registration);
     } catch (e) {
       console.log('Service Worker registration failed:', e);
     }
@@ -49,6 +52,56 @@ async function init() {
   
   // Set up PWA install prompt
   setupPWAInstallPrompt();
+}
+
+/**
+ * Set up service worker update handler
+ * @param {ServiceWorkerRegistration} registration - Service worker registration
+ */
+function setupServiceWorkerUpdateHandler(registration) {
+  // Check for updates periodically
+  setInterval(() => {
+    registration.update();
+  }, 60000); // Check every minute
+  
+  // Handle update found
+  registration.addEventListener('updatefound', () => {
+    const newWorker = registration.installing;
+    
+    newWorker.addEventListener('statechange', () => {
+      if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+        // New service worker installed, show update notification
+        showUpdateNotification(newWorker);
+      }
+    });
+  });
+  
+  // Handle controller change (when new SW takes over)
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    // Reload page to show new version
+    window.location.reload();
+  });
+}
+
+/**
+ * Show update notification to user
+ * @param {ServiceWorker} newWorker - The new service worker
+ */
+function showUpdateNotification(newWorker) {
+  const notification = document.getElementById('update-notification');
+  const updateButton = document.getElementById('update-button');
+  
+  // Show the notification
+  notification.style.display = 'block';
+  
+  // Handle update button click
+  updateButton.onclick = () => {
+    // Tell the new service worker to skip waiting
+    newWorker.postMessage({ type: 'SKIP_WAITING' });
+    
+    // Hide the notification
+    notification.style.display = 'none';
+  };
 }
 
 /**
