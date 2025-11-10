@@ -153,7 +153,10 @@ function handleSubmitAnswer() {
   
   // Update UI
   ui.showFeedback(isCorrect, currentExercise.correctAnswer);
-  ui.playSound(isCorrect);
+  
+  // Play appropriate sound effect
+  playSoundForStateChange(oldState, newState, isCorrect);
+  
   ui.disableAnswerInput();
   
   // Animate star transition
@@ -205,6 +208,32 @@ function getUserAnswer() {
   } else {
     const input = document.getElementById('answer-input');
     return input ? input.value.trim() : null;
+  }
+}
+
+/**
+ * Play sound effect based on state change
+ * @param {Object} oldState - Previous state
+ * @param {Object} newState - New state
+ * @param {boolean} isCorrect - Whether answer was correct
+ */
+function playSoundForStateChange(oldState, newState, isCorrect) {
+  if (isCorrect) {
+    if (oldState.state === 'frozen' && newState.state === 'active') {
+      // Frozen star unfrozen
+      ui.playSound('unfreeze');
+    } else {
+      // Any other correct answer
+      ui.playSound('correct');
+    }
+  } else {
+    if (oldState.state === 'active' && oldState.level > 0 && newState.state === 'frozen') {
+      // Colored star frozen
+      ui.playSound('freeze');
+    } else {
+      // Any other incorrect answer
+      ui.playSound('incorrect');
+    }
   }
 }
 
