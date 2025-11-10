@@ -7,8 +7,10 @@ An English learning app for irregular verbs (Past Simple practice for 6th grader
 - 🔄 Error handling with frozen and broken stars
 - 💾 Progress saved in localStorage
 - 📱 Progressive Web App (installable)
+- 📱 Mobile-optimized with keyboard support and safe-area insets
 - 🎨 Kid-friendly, colorful UI
 - 🔊 Sound effects for feedback
+- 🔄 Automatic syncing of new verbs from JSON
 
 ## Running the App
 
@@ -77,3 +79,9 @@ LingoStar/
 - Correct answer with frozen star: **Unfreeze** (keep current level)
 
 Words with broken stars appear more frequently for extra practice!
+
+## Mobile Support
+- **Responsive Design**: Optimized for smartphones and tablets
+- **Keyboard Handling**: Input field and buttons remain visible when on-screen keyboard appears
+- **Safe Areas**: Supports notched devices (iPhone X+) with proper insets
+- **Touch Optimized**: Large touch targets for better mobile experience

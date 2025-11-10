@@ -10,16 +10,19 @@ body {
   font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile keyboard support */
   display: flex;
   justify-content: center;
   align-items: center;
   color: #333;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 #app {
   width: 90%;
   max-width: 600px;
   height: 90vh;
+  height: 90dvh; /* Dynamic viewport height for mobile keyboard support */
   max-height: 800px;
   display: flex;
   flex-direction: column;
@@ -27,6 +30,7 @@ body {
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  position: relative;
 }
 
 /* Top Bar */
@@ -200,6 +204,9 @@ body {
   align-items: center;
   padding: 40px;
   overflow-y: auto;
+  /* Ensure content is scrollable on mobile when keyboard appears */
+  -webkit-overflow-scrolling: touch;
+  min-height: 0; /* Allow flexbox shrinking */
 }
 
 #question-text {
@@ -289,12 +296,14 @@ body {
 /* Bottom Bar */
 #bottom-bar {
   padding: 20px;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom)); /* Account for device safe areas */
   background: #f8f9fa;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   border-top: 2px solid #e0e0e0;
+  flex-shrink: 0; /* Prevent bottom bar from shrinking */
 }
 
 #feedback-text {
@@ -352,15 +361,59 @@ body {
 
 /* Responsive Design */
 @media (max-width: 600px) {
+  body {
+    padding: 0; /* Remove padding on mobile for full-screen */
+  }
+  
   #app {
     width: 100%;
     height: 100vh;
+    height: 100dvh; /* Dynamic viewport height */
     max-height: none;
     border-radius: 0;
   }
   
+  #top-bar {
+    padding: 15px;
+    padding-top: calc(15px + env(safe-area-inset-top)); /* Safe area for notch */
+    flex-wrap: wrap;
+  }
+  
+  #star-summary {
+    gap: 8px;
+    font-size: 12px;
+  }
+  
+  .summary-item {
+    font-size: 12px;
+  }
+  
+  .star-icon {
+    font-size: 16px;
+  }
+  
+  #current-star {
+    font-size: 32px;
+  }
+  
+  #exercise-container {
+    padding: 20px;
+    justify-content: flex-start; /* Align to top on mobile for better keyboard handling */
+    padding-top: 30px;
+  }
+  
   #question-text {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .hint {
+    font-size: 14px;
+  }
+  
+  .sentence {
+    font-size: 16px;
+    padding: 12px;
   }
   
   .option-button {
@@ -373,7 +426,46 @@ body {
     padding: 12px 20px;
   }
   
+  #bottom-bar {
+    padding: 15px;
+    padding-bottom: calc(15px + env(safe-area-inset-bottom));
+    gap: 10px;
+  }
+  
+  #feedback-text {
+    font-size: 16px;
+  }
+  
+  #ok-button {
+    padding: 12px 50px;
+    font-size: 18px;
+    width: 100%; /* Full width on mobile for easier tapping */
+    max-width: 300px;
+  }
+}
+
+/* Special handling for very small screens or when keyboard is visible */
+@media (max-height: 500px) {
+  #exercise-container {
+    padding: 10px 20px;
+    justify-content: flex-start;
+  }
+  
+  #question-text {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
   #current-star {
-    font-size: 36px;
+    font-size: 28px;
+  }
+  
+  #top-bar {
+    padding: 10px 15px;
+  }
+  
+  #bottom-bar {
+    padding: 10px 15px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
   }
 }

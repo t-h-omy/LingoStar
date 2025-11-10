@@ -118,3 +118,25 @@ export function getStarSummary(progress, verbs) {
   
   return summary;
 }
+
+/**
+ * Initialize progress for any new verbs not in current progress
+ * @param {Object} progress - Current progress object
+ * @param {Array} verbs - List of all verbs from JSON
+ * @returns {Object} Updated progress with new verbs initialized
+ */
+export function syncNewVerbs(progress, verbs) {
+  let updated = false;
+  verbs.forEach(verb => {
+    if (!progress[verb.infinitive]) {
+      progress[verb.infinitive] = { level: 0, state: 'active' };
+      updated = true;
+    }
+  });
+  
+  if (updated) {
+    saveProgress(progress);
+  }
+  
+  return progress;
+}
