@@ -9,6 +9,8 @@ let progress = {};
 let currentVerb = null;
 let currentExercise = null;
 let awaitingNextExercise = false;
+let exerciseCount = 0;
+let deferredPrompt = null;
 
 /**
  * Initialize the app
@@ -44,6 +46,49 @@ async function init() {
   
   // Set up event listeners
   setupEventListeners();
+  
+  // Set up PWA install prompt
+  setupPWAInstallPrompt();
+}
+
+/**
+ * Set up PWA install prompt
+ */
+function setupPWAInstallPrompt() {
+  // Capture the beforeinstallprompt event
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the default prompt
+    e.preventDefault();
+    // Store the event for later use
+    deferredPrompt = e;
+    console.log('Install prompt available');
+  });
+  
+  // Listen for app installed event
+  window.addEventListener('appinstalled', () => {
+    console.log('PWA installed successfully');
+    deferredPrompt = null;
+  });
+}
+
+/**
+ * Show PWA install prompt after several exercises
+ */
+function maybeShowInstallPrompt() {
+  // Show after 10 exercises, if not already installed and prompt is available
+  if (exerciseCount === 10 && deferredPrompt && !window.matchMedia('(display-mode: standalone)').matches) {
+    const installPrompt = confirm('Add LingoStar to your home screen for quick access?');
+    
+    if (installPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        }
+        deferredPrompt = null;
+      });
+    }
+  }
 }
 
 /**
@@ -61,6 +106,12 @@ function updateStarSummary() {
 function startNewExercise() {
   awaitingNextExercise = false;
   ui.clearFeedback();
+  
+  // Increment exercise count
+  exerciseCount++;
+  
+  // Maybe show install prompt
+  maybeShowInstallPrompt();
   
   // Select verb and generate exercise
   currentVerb = exercises.selectVerb(progress);
@@ -178,6 +229,65 @@ function setupEventListeners() {
       handleSubmitAnswer();
     }
   });
+  
+  // Global Enter key handler for OK button
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === 'Return') {
+      const okButton = document.getElementById('ok-button');
+      const activeElement = document.activeElement;
+      
+      // Don't trigger if already handled by input field
+      if (activeElement && activeElement.id === 'answer-input') {
+        return;
+      }
+      
+      // Trigger OK button
+      if (okButton) {
+        e.preventDefault();
+        okButton.click();
+      }
+    }
+  });
+  
+  // Handle mobile keyboard visibility with visual viewport
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', handleViewportResize);
+    window.visualViewport.addEventListener('scroll', handleViewportScroll);
+  }
+}
+
+/**
+ * Handle viewport resize (mobile keyboard appearance)
+ */
+function handleViewportResize() {
+  const viewport = window.visualViewport;
+  const input = document.getElementById('answer-input');
+  const okButton = document.getElementById('ok-button');
+  
+  if (!viewport) return;
+  
+  // Check if keyboard is likely visible (viewport height significantly reduced)
+  const viewportHeight = viewport.height;
+  const windowHeight = window.innerHeight;
+  const keyboardVisible = viewportHeight < windowHeight * 0.75;
+  
+  if (keyboardVisible && input) {
+    // Scroll input and button into view
+    setTimeout(() => {
+      const bottomBar = document.getElementById('bottom-bar');
+      if (bottomBar) {
+        bottomBar.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    }, 100);
+  }
+}
+
+/**
+ * Handle viewport scroll (additional keyboard handling)
+ */
+function handleViewportScroll() {
+  // Ensure input stays visible when viewport scrolls
+  handleViewportResize();
 }
 
 // Start the app
