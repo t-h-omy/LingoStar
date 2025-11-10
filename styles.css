@@ -597,11 +597,11 @@ body {
   }
   
   .ok-button-inline {
-    padding: 10px 12px;
-    width: 60px;
-    min-width: 60px;
-    max-width: 60px;
-    font-size: 15px;
+    padding: 10px 12px !important;
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    font-size: 15px !important;
   }
   
   .input-row, .option-container {
