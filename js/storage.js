@@ -49,35 +49,45 @@ export function getVerbState(progress, infinitive) {
  * @param {Object} progress - Current progress object
  * @param {string} infinitive - Verb infinitive form
  * @param {boolean} isCorrect - Whether the answer was correct
+ * @returns {boolean} shouldRepeat - Whether the same exercise should repeat
  */
 export function updateVerbState(progress, infinitive, isCorrect) {
   const state = getVerbState(progress, infinitive);
+  let shouldRepeat = false;
   
   if (isCorrect) {
-    if (state.state === 'frozen') {
-      // Unfreeze on correct answer
+    if (state.state === 'broken') {
+      // Fix for broken star recovery: correct answer on broken star → neutral outlined star
+      state.state = 'active';
+      state.level = 0;
+    } else if (state.state === 'frozen') {
+      // Unfreeze on correct answer while frozen - keep the same level
       state.state = 'active';
     } else if (state.state === 'active' && state.level < 5) {
-      // Increase level
+      // Increase level on correct answer with active star
       state.level++;
     }
   } else {
     // Wrong answer
-    if (state.level === 0) {
-      // No star yet - show broken star
+    if (state.state === 'broken') {
+      // Already broken, stay broken
+      // No repeat needed
+    } else if (state.level === 0 && state.state === 'active') {
+      // No star yet (neutral outlined) - show broken star
       state.state = 'broken';
-    } else if (state.state === 'active') {
-      // Freeze the star
+    } else if (state.state === 'active' && state.level > 0) {
+      // Freeze the colored star (new frozen behavior)
       state.state = 'frozen';
+      shouldRepeat = true; // Repeat the same exercise immediately
     } else if (state.state === 'frozen') {
-      // Second fail while frozen - reset
+      // Second fail while frozen - reset to neutral outlined
       state.level = 0;
-      state.state = 'broken';
+      state.state = 'active';
     }
-    // If already broken, stay broken
   }
   
   saveProgress(progress);
+  return shouldRepeat;
 }
 
 /**
