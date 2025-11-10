@@ -1,0 +1,2582 @@
+[
+  {
+    "infinitive": "be",
+    "past": "was/were",
+    "translation": "sein",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'be'?",
+        "options": [
+          "beed",
+          "was/were",
+          "bet"
+        ],
+        "answer": "was/were"
+      },
+      "input": {
+        "question": "Write the past simple form of 'be'.",
+        "answer": "was/were"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er war in der Schule.'",
+        "answer": "He was at school."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " at school yesterday.",
+        "infinitive_hint": "(to be)",
+        "answer": "was"
+      }
+    }
+  },
+  {
+    "infinitive": "become",
+    "past": "became",
+    "translation": "werden",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'become'?",
+        "options": [
+          "becomet",
+          "became",
+          "becomt"
+        ],
+        "answer": "became"
+      },
+      "input": {
+        "question": "Write the past simple form of 'become'.",
+        "answer": "became"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie wurde Ärztin.'",
+        "answer": "She became a doctor."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " a doctor last year.",
+        "infinitive_hint": "(to become)",
+        "answer": "became"
+      }
+    }
+  },
+  {
+    "infinitive": "begin",
+    "past": "began",
+    "translation": "beginnen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'begin'?",
+        "options": [
+          "began",
+          "beganed",
+          "begint"
+        ],
+        "answer": "began"
+      },
+      "input": {
+        "question": "Write the past simple form of 'begin'.",
+        "answer": "began"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir begannen die Hausaufgaben.'",
+        "answer": "We began the homework."
+      },
+      "gap": {
+        "before_gap": "They ",
+        "after_gap": " their homework at 5 o’clock.",
+        "infinitive_hint": "(to begin)",
+        "answer": "began"
+      }
+    }
+  },
+  {
+    "infinitive": "bet",
+    "past": "bet",
+    "translation": "wetten",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'bet'?",
+        "options": [
+          "betd",
+          "bett",
+          "bet"
+        ],
+        "answer": "bet"
+      },
+      "input": {
+        "question": "Write the past simple form of 'bet'.",
+        "answer": "bet"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich wettete auf mein Team.'",
+        "answer": "I bet on my team."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " on my favorite team.",
+        "infinitive_hint": "(to bet)",
+        "answer": "bet"
+      }
+    }
+  },
+  {
+    "infinitive": "bite",
+    "past": "bit",
+    "translation": "beißen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'bite'?",
+        "options": [
+          "bitet",
+          "bit",
+          "biteed"
+        ],
+        "answer": "bit"
+      },
+      "input": {
+        "question": "Write the past simple form of 'bite'.",
+        "answer": "bit"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Der Hund biss meinen Schuh.'",
+        "answer": "The dog bit my shoe."
+      },
+      "gap": {
+        "before_gap": "The dog ",
+        "after_gap": " my shoe.",
+        "infinitive_hint": "(to bite)",
+        "answer": "bit"
+      }
+    }
+  },
+  {
+    "infinitive": "blow",
+    "past": "blew",
+    "translation": "blasen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'blow'?",
+        "options": [
+          "blew",
+          "blewed",
+          "blowt"
+        ],
+        "answer": "blew"
+      },
+      "input": {
+        "question": "Write the past simple form of 'blow'.",
+        "answer": "blew"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Der Wind blies stark.'",
+        "answer": "The wind blew strongly."
+      },
+      "gap": {
+        "before_gap": "The wind ",
+        "after_gap": " very strongly.",
+        "infinitive_hint": "(to blow)",
+        "answer": "blew"
+      }
+    }
+  },
+  {
+    "infinitive": "break",
+    "past": "broke",
+    "translation": "zerbrechen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'break'?",
+        "options": [
+          "breakt",
+          "broke",
+          "breat"
+        ],
+        "answer": "broke"
+      },
+      "input": {
+        "question": "Write the past simple form of 'break'.",
+        "answer": "broke"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er zerbrach sein Lineal.'",
+        "answer": "He broke his ruler."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " his pencil in class.",
+        "infinitive_hint": "(to break)",
+        "answer": "broke"
+      }
+    }
+  },
+  {
+    "infinitive": "bring",
+    "past": "brought",
+    "translation": "(mit-)bringen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'bring'?",
+        "options": [
+          "brought",
+          "brint",
+          "bringd"
+        ],
+        "answer": "brought"
+      },
+      "input": {
+        "question": "Write the past simple form of 'bring'.",
+        "answer": "brought"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie brachte ihr Buch.'",
+        "answer": "She brought her book."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " her backpack to school.",
+        "infinitive_hint": "(to bring)",
+        "answer": "brought"
+      }
+    }
+  },
+  {
+    "infinitive": "build",
+    "past": "built",
+    "translation": "bauen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'build'?",
+        "options": [
+          "buildt",
+          "builded",
+          "built"
+        ],
+        "answer": "built"
+      },
+      "input": {
+        "question": "Write the past simple form of 'build'.",
+        "answer": "built"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir bauten eine Sandburg.'",
+        "answer": "We built a sandcastle."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " a sandcastle at the beach.",
+        "infinitive_hint": "(to build)",
+        "answer": "built"
+      }
+    }
+  },
+  {
+    "infinitive": "burn",
+    "past": "burnt/burned",
+    "translation": "brennen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'burn'?",
+        "options": [
+          "burnt/burned",
+          "burnt",
+          "burnd"
+        ],
+        "answer": "burnt/burned"
+      },
+      "input": {
+        "question": "Write the past simple form of 'burn'.",
+        "answer": "burnt/burned"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er verbrannte sich.'",
+        "answer": "He burnt/burned himself."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " his hand on the stove.",
+        "infinitive_hint": "(to burn)",
+        "answer": "burnt/burned"
+      }
+    }
+  },
+  {
+    "infinitive": "buy",
+    "past": "bought",
+    "translation": "kaufen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'buy'?",
+        "options": [
+          "bought",
+          "buyt",
+          "buyed"
+        ],
+        "answer": "bought"
+      },
+      "input": {
+        "question": "Write the past simple form of 'buy'.",
+        "answer": "bought"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie kaufte ein T-Shirt.'",
+        "answer": "She bought a T-shirt."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " a new dress yesterday.",
+        "infinitive_hint": "(to buy)",
+        "answer": "bought"
+      }
+    }
+  },
+  {
+    "infinitive": "catch",
+    "past": "caught",
+    "translation": "fangen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'catch'?",
+        "options": [
+          "catct",
+          "catched",
+          "caught"
+        ],
+        "answer": "caught"
+      },
+      "input": {
+        "question": "Write the past simple form of 'catch'.",
+        "answer": "caught"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich fing den Ball.'",
+        "answer": "I caught the ball."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " the ball during the game.",
+        "infinitive_hint": "(to catch)",
+        "answer": "caught"
+      }
+    }
+  },
+  {
+    "infinitive": "choose",
+    "past": "chose",
+    "translation": "auswählen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'choose'?",
+        "options": [
+          "choost",
+          "chose",
+          "chooseed"
+        ],
+        "answer": "chose"
+      },
+      "input": {
+        "question": "Write the past simple form of 'choose'.",
+        "answer": "chose"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir wählten den Film aus.'",
+        "answer": "We chose the film."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " the red car.",
+        "infinitive_hint": "(to choose)",
+        "answer": "chose"
+      }
+    }
+  },
+  {
+    "infinitive": "come",
+    "past": "came",
+    "translation": "kommen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'come'?",
+        "options": [
+          "came",
+          "comeed",
+          "comed"
+        ],
+        "answer": "came"
+      },
+      "input": {
+        "question": "Write the past simple form of 'come'.",
+        "answer": "came"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie kamen nach Hause.'",
+        "answer": "They came home."
+      },
+      "gap": {
+        "before_gap": "They ",
+        "after_gap": " home late last night.",
+        "infinitive_hint": "(to come)",
+        "answer": "came"
+      }
+    }
+  },
+  {
+    "infinitive": "cost",
+    "past": "cost",
+    "translation": "kosten",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'cost'?",
+        "options": [
+          "costd",
+          "costt",
+          "cost"
+        ],
+        "answer": "cost"
+      },
+      "input": {
+        "question": "Write the past simple form of 'cost'.",
+        "answer": "cost"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Das Buch kostete zehn Euro.'",
+        "answer": "The book cost ten euros."
+      },
+      "gap": {
+        "before_gap": "The book ",
+        "after_gap": " ten euros.",
+        "infinitive_hint": "(to cost)",
+        "answer": "cost"
+      }
+    }
+  },
+  {
+    "infinitive": "cut",
+    "past": "cut",
+    "translation": "schneiden",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'cut'?",
+        "options": [
+          "cut",
+          "cutt",
+          "cuted"
+        ],
+        "answer": "cut"
+      },
+      "input": {
+        "question": "Write the past simple form of 'cut'.",
+        "answer": "cut"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er schnitt das Papier.'",
+        "answer": "He cut the paper."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the paper with scissors.",
+        "infinitive_hint": "(to cut)",
+        "answer": "cut"
+      }
+    }
+  },
+  {
+    "infinitive": "dig",
+    "past": "dug",
+    "translation": "graben",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'dig'?",
+        "options": [
+          "dug",
+          "digt",
+          "digd"
+        ],
+        "answer": "dug"
+      },
+      "input": {
+        "question": "Write the past simple form of 'dig'.",
+        "answer": "dug"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Der Hund grub ein Loch.'",
+        "answer": "The dog dug a hole."
+      },
+      "gap": {
+        "before_gap": "The dog ",
+        "after_gap": " a hole in the garden.",
+        "infinitive_hint": "(to dig)",
+        "answer": "dug"
+      }
+    }
+  },
+  {
+    "infinitive": "do",
+    "past": "did",
+    "translation": "machen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'do'?",
+        "options": [
+          "doed",
+          "did",
+          "dided"
+        ],
+        "answer": "did"
+      },
+      "input": {
+        "question": "Write the past simple form of 'do'.",
+        "answer": "did"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich machte die Hausaufgaben.'",
+        "answer": "I did the homework."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " my homework after dinner.",
+        "infinitive_hint": "(to do)",
+        "answer": "did"
+      }
+    }
+  },
+  {
+    "infinitive": "draw",
+    "past": "drew",
+    "translation": "zeichnen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'draw'?",
+        "options": [
+          "drawed",
+          "drawt",
+          "drew"
+        ],
+        "answer": "drew"
+      },
+      "input": {
+        "question": "Write the past simple form of 'draw'.",
+        "answer": "drew"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie zeichnete eine Katze.'",
+        "answer": "She drew a cat."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " a picture of her cat.",
+        "infinitive_hint": "(to draw)",
+        "answer": "drew"
+      }
+    }
+  },
+  {
+    "infinitive": "drink",
+    "past": "drank",
+    "translation": "trinken",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'drink'?",
+        "options": [
+          "drank",
+          "drint",
+          "drinked"
+        ],
+        "answer": "drank"
+      },
+      "input": {
+        "question": "Write the past simple form of 'drink'.",
+        "answer": "drank"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er trank Wasser.'",
+        "answer": "He drank water."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " a glass of water.",
+        "infinitive_hint": "(to drink)",
+        "answer": "drank"
+      }
+    }
+  },
+  {
+    "infinitive": "eat",
+    "past": "ate",
+    "translation": "essen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'eat'?",
+        "options": [
+          "eated",
+          "eatd",
+          "ate"
+        ],
+        "answer": "ate"
+      },
+      "input": {
+        "question": "Write the past simple form of 'eat'.",
+        "answer": "ate"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich aß einen Apfel.'",
+        "answer": "I ate an apple."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " an apple.",
+        "infinitive_hint": "(to eat)",
+        "answer": "ate"
+      }
+    }
+  },
+  {
+    "infinitive": "fall",
+    "past": "fell",
+    "translation": "fallen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'fall'?",
+        "options": [
+          "falled",
+          "fell",
+          "fallt"
+        ],
+        "answer": "fell"
+      },
+      "input": {
+        "question": "Write the past simple form of 'fall'.",
+        "answer": "fell"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er fiel vom Fahrrad.'",
+        "answer": "He fell off his bike."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " off his bike.",
+        "infinitive_hint": "(to fall)",
+        "answer": "fell"
+      }
+    }
+  },
+  {
+    "infinitive": "feed",
+    "past": "fed",
+    "translation": "füttern",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'feed'?",
+        "options": [
+          "fed",
+          "feded",
+          "feet"
+        ],
+        "answer": "fed"
+      },
+      "input": {
+        "question": "Write the past simple form of 'feed'.",
+        "answer": "fed"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie fütterte die Katze.'",
+        "answer": "She fed the cat."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " the cat.",
+        "infinitive_hint": "(to feed)",
+        "answer": "fed"
+      }
+    }
+  },
+  {
+    "infinitive": "feel",
+    "past": "felt",
+    "translation": "fühlen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'feel'?",
+        "options": [
+          "feeld",
+          "feelt",
+          "felt"
+        ],
+        "answer": "felt"
+      },
+      "input": {
+        "question": "Write the past simple form of 'feel'.",
+        "answer": "felt"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich fühlte mich müde.'",
+        "answer": "I felt tired."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " tired.",
+        "infinitive_hint": "(to feel)",
+        "answer": "felt"
+      }
+    }
+  },
+  {
+    "infinitive": "fight",
+    "past": "fought",
+    "translation": "kämpfen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'fight'?",
+        "options": [
+          "fought",
+          "fightt",
+          "fightd"
+        ],
+        "answer": "fought"
+      },
+      "input": {
+        "question": "Write the past simple form of 'fight'.",
+        "answer": "fought"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie stritten sich.'",
+        "answer": "They fought."
+      },
+      "gap": {
+        "before_gap": "They ",
+        "after_gap": " in the yard.",
+        "infinitive_hint": "(to fight)",
+        "answer": "fought"
+      }
+    }
+  },
+  {
+    "infinitive": "find",
+    "past": "found",
+    "translation": "finden",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'find'?",
+        "options": [
+          "found",
+          "fint",
+          "finded"
+        ],
+        "answer": "found"
+      },
+      "input": {
+        "question": "Write the past simple form of 'find'.",
+        "answer": "found"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich fand meinen Schlüssel.'",
+        "answer": "I found my key."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " my key.",
+        "infinitive_hint": "(to find)",
+        "answer": "found"
+      }
+    }
+  },
+  {
+    "infinitive": "fit",
+    "past": "fit/fitted",
+    "translation": "passen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'fit'?",
+        "options": [
+          "fit/fitteded",
+          "fit/fitted",
+          "fit"
+        ],
+        "answer": "fit/fitted"
+      },
+      "input": {
+        "question": "Write the past simple form of 'fit'.",
+        "answer": "fit/fitted"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Das Hemd passte gut.'",
+        "answer": "The shirt fit/fitted well."
+      },
+      "gap": {
+        "before_gap": "The shirt ",
+        "after_gap": " well.",
+        "infinitive_hint": "(to fit)",
+        "answer": "fit/fitted"
+      }
+    }
+  },
+  {
+    "infinitive": "fly",
+    "past": "flew",
+    "translation": "fliegen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'fly'?",
+        "options": [
+          "flewed",
+          "flyt",
+          "flew"
+        ],
+        "answer": "flew"
+      },
+      "input": {
+        "question": "Write the past simple form of 'fly'.",
+        "answer": "flew"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Der Vogel flog hoch.'",
+        "answer": "The bird flew high."
+      },
+      "gap": {
+        "before_gap": "The bird ",
+        "after_gap": " high in the sky.",
+        "infinitive_hint": "(to fly)",
+        "answer": "flew"
+      }
+    }
+  },
+  {
+    "infinitive": "forget",
+    "past": "forgot",
+    "translation": "vergessen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'forget'?",
+        "options": [
+          "forgoted",
+          "forgot",
+          "forgeted"
+        ],
+        "answer": "forgot"
+      },
+      "input": {
+        "question": "Write the past simple form of 'forget'.",
+        "answer": "forgot"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich vergaß meine Hausaufgaben.'",
+        "answer": "I forgot my homework."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " my homework.",
+        "infinitive_hint": "(to forget)",
+        "answer": "forgot"
+      }
+    }
+  },
+  {
+    "infinitive": "forgive",
+    "past": "forgave",
+    "translation": "vergeben",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'forgive'?",
+        "options": [
+          "forgave",
+          "forgivt",
+          "forgived"
+        ],
+        "answer": "forgave"
+      },
+      "input": {
+        "question": "Write the past simple form of 'forgive'.",
+        "answer": "forgave"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er verzieh ihr.'",
+        "answer": "He forgave her."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " her mistake.",
+        "infinitive_hint": "(to forgive)",
+        "answer": "forgave"
+      }
+    }
+  },
+  {
+    "infinitive": "freeze",
+    "past": "froze",
+    "translation": "gefrieren",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'freeze'?",
+        "options": [
+          "freezeed",
+          "froze",
+          "freezt"
+        ],
+        "answer": "froze"
+      },
+      "input": {
+        "question": "Write the past simple form of 'freeze'.",
+        "answer": "froze"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Das Wasser fror.'",
+        "answer": "The water froze."
+      },
+      "gap": {
+        "before_gap": "The water ",
+        "after_gap": " in the cold.",
+        "infinitive_hint": "(to freeze)",
+        "answer": "froze"
+      }
+    }
+  },
+  {
+    "infinitive": "get",
+    "past": "got",
+    "translation": "bekommen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'get'?",
+        "options": [
+          "got",
+          "goted",
+          "get"
+        ],
+        "answer": "got"
+      },
+      "input": {
+        "question": "Write the past simple form of 'get'.",
+        "answer": "got"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich bekam ein Geschenk.'",
+        "answer": "I got a present."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " a new bike.",
+        "infinitive_hint": "(to get)",
+        "answer": "got"
+      }
+    }
+  },
+  {
+    "infinitive": "give",
+    "past": "gave",
+    "translation": "geben",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'give'?",
+        "options": [
+          "giveed",
+          "gived",
+          "gave"
+        ],
+        "answer": "gave"
+      },
+      "input": {
+        "question": "Write the past simple form of 'give'.",
+        "answer": "gave"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie gab ihm das Buch.'",
+        "answer": "She gave him the book."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " him a book.",
+        "infinitive_hint": "(to give)",
+        "answer": "gave"
+      }
+    }
+  },
+  {
+    "infinitive": "go",
+    "past": "went",
+    "translation": "gehen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'go'?",
+        "options": [
+          "went",
+          "goed",
+          "wented"
+        ],
+        "answer": "went"
+      },
+      "input": {
+        "question": "Write the past simple form of 'go'.",
+        "answer": "went"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir gingen in die Schule.'",
+        "answer": "We went to school."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " to school.",
+        "infinitive_hint": "(to go)",
+        "answer": "went"
+      }
+    }
+  },
+  {
+    "infinitive": "grow",
+    "past": "grew",
+    "translation": "wachsen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'grow'?",
+        "options": [
+          "grew",
+          "growed",
+          "grewed"
+        ],
+        "answer": "grew"
+      },
+      "input": {
+        "question": "Write the past simple form of 'grow'.",
+        "answer": "grew"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Die Pflanze wuchs schnell.'",
+        "answer": "The plant grew quickly."
+      },
+      "gap": {
+        "before_gap": "The plant ",
+        "after_gap": " fast.",
+        "infinitive_hint": "(to grow)",
+        "answer": "grew"
+      }
+    }
+  },
+  {
+    "infinitive": "hang",
+    "past": "hung",
+    "translation": "hängen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'hang'?",
+        "options": [
+          "hanged",
+          "hangd",
+          "hung"
+        ],
+        "answer": "hung"
+      },
+      "input": {
+        "question": "Write the past simple form of 'hang'.",
+        "answer": "hung"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er hing das Bild auf.'",
+        "answer": "He hung the picture."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the picture on the wall.",
+        "infinitive_hint": "(to hang)",
+        "answer": "hung"
+      }
+    }
+  },
+  {
+    "infinitive": "have",
+    "past": "had",
+    "translation": "haben",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'have'?",
+        "options": [
+          "havt",
+          "had",
+          "haded"
+        ],
+        "answer": "had"
+      },
+      "input": {
+        "question": "Write the past simple form of 'have'.",
+        "answer": "had"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich hatte Glück.'",
+        "answer": "I had luck."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " a good idea.",
+        "infinitive_hint": "(to have)",
+        "answer": "had"
+      }
+    }
+  },
+  {
+    "infinitive": "hear",
+    "past": "heard",
+    "translation": "hören",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'hear'?",
+        "options": [
+          "heart",
+          "heat",
+          "heard"
+        ],
+        "answer": "heard"
+      },
+      "input": {
+        "question": "Write the past simple form of 'hear'.",
+        "answer": "heard"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir hörten Musik.'",
+        "answer": "We heard music."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " a strange sound.",
+        "infinitive_hint": "(to hear)",
+        "answer": "heard"
+      }
+    }
+  },
+  {
+    "infinitive": "hide",
+    "past": "hid",
+    "translation": "(sich) verstecken",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'hide'?",
+        "options": [
+          "hidt",
+          "hid",
+          "hided"
+        ],
+        "answer": "hid"
+      },
+      "input": {
+        "question": "Write the past simple form of 'hide'.",
+        "answer": "hid"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie versteckte sich.'",
+        "answer": "She hid."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " behind the tree.",
+        "infinitive_hint": "(to hide)",
+        "answer": "hid"
+      }
+    }
+  },
+  {
+    "infinitive": "hit",
+    "past": "hit",
+    "translation": "schlagen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'hit'?",
+        "options": [
+          "hitt",
+          "hit",
+          "hitd"
+        ],
+        "answer": "hit"
+      },
+      "input": {
+        "question": "Write the past simple form of 'hit'.",
+        "answer": "hit"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er schlug den Ball.'",
+        "answer": "He hit the ball."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the ball hard.",
+        "infinitive_hint": "(to hit)",
+        "answer": "hit"
+      }
+    }
+  },
+  {
+    "infinitive": "hold",
+    "past": "held",
+    "translation": "halten",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'hold'?",
+        "options": [
+          "holt",
+          "held",
+          "helded"
+        ],
+        "answer": "held"
+      },
+      "input": {
+        "question": "Write the past simple form of 'hold'.",
+        "answer": "held"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er hielt das Seil.'",
+        "answer": "He held the rope."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the rope.",
+        "infinitive_hint": "(to hold)",
+        "answer": "held"
+      }
+    }
+  },
+  {
+    "infinitive": "hurt",
+    "past": "hurt",
+    "translation": "verletzen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'hurt'?",
+        "options": [
+          "hurt",
+          "hurtt",
+          "hurted"
+        ],
+        "answer": "hurt"
+      },
+      "input": {
+        "question": "Write the past simple form of 'hurt'.",
+        "answer": "hurt"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich verletzte mich.'",
+        "answer": "I hurt myself."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " my hand.",
+        "infinitive_hint": "(to hurt)",
+        "answer": "hurt"
+      }
+    }
+  },
+  {
+    "infinitive": "keep",
+    "past": "kept",
+    "translation": "(auf-)bewahren",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'keep'?",
+        "options": [
+          "keepd",
+          "kepted",
+          "kept"
+        ],
+        "answer": "kept"
+      },
+      "input": {
+        "question": "Write the past simple form of 'keep'.",
+        "answer": "kept"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie behielt das Geld.'",
+        "answer": "She kept the money."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " the money.",
+        "infinitive_hint": "(to keep)",
+        "answer": "kept"
+      }
+    }
+  },
+  {
+    "infinitive": "know",
+    "past": "knew",
+    "translation": "kennen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'know'?",
+        "options": [
+          "knowt",
+          "knew",
+          "knewed"
+        ],
+        "answer": "knew"
+      },
+      "input": {
+        "question": "Write the past simple form of 'know'.",
+        "answer": "knew"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich kannte die Antwort.'",
+        "answer": "I knew the answer."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " the answer.",
+        "infinitive_hint": "(to know)",
+        "answer": "knew"
+      }
+    }
+  },
+  {
+    "infinitive": "learn",
+    "past": "learnt/learned",
+    "translation": "lernen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'learn'?",
+        "options": [
+          "learnt/learned",
+          "learned",
+          "learnt/learneded"
+        ],
+        "answer": "learnt/learned"
+      },
+      "input": {
+        "question": "Write the past simple form of 'learn'.",
+        "answer": "learnt/learned"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir lernten Englisch.'",
+        "answer": "We learnt/learned English."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " English.",
+        "infinitive_hint": "(to learn)",
+        "answer": "learnt/learned"
+      }
+    }
+  },
+  {
+    "infinitive": "leave",
+    "past": "left",
+    "translation": "(ver-)lassen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'leave'?",
+        "options": [
+          "leavet",
+          "left",
+          "leaveed"
+        ],
+        "answer": "left"
+      },
+      "input": {
+        "question": "Write the past simple form of 'leave'.",
+        "answer": "left"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er verließ das Haus.'",
+        "answer": "He left the house."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the house.",
+        "infinitive_hint": "(to leave)",
+        "answer": "left"
+      }
+    }
+  },
+  {
+    "infinitive": "let",
+    "past": "let",
+    "translation": "lassen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'let'?",
+        "options": [
+          "let",
+          "leted",
+          "lett"
+        ],
+        "answer": "let"
+      },
+      "input": {
+        "question": "Write the past simple form of 'let'.",
+        "answer": "let"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er ließ den Hund raus.'",
+        "answer": "He let the dog out."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the dog out.",
+        "infinitive_hint": "(to let)",
+        "answer": "let"
+      }
+    }
+  },
+  {
+    "infinitive": "lie",
+    "past": "lay",
+    "translation": "liegen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'lie'?",
+        "options": [
+          "lied",
+          "lay",
+          "lieed"
+        ],
+        "answer": "lay"
+      },
+      "input": {
+        "question": "Write the past simple form of 'lie'.",
+        "answer": "lay"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich liegen etwas.'",
+        "answer": "I lay something."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " something.",
+        "infinitive_hint": "(to lie)",
+        "answer": "lay"
+      }
+    }
+  },
+  {
+    "infinitive": "lose",
+    "past": "lost",
+    "translation": "verlieren",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'lose'?",
+        "options": [
+          "losed",
+          "lost",
+          "losted"
+        ],
+        "answer": "lost"
+      },
+      "input": {
+        "question": "Write the past simple form of 'lose'.",
+        "answer": "lost"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich verlor meinen Ball.'",
+        "answer": "I lost my ball."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " my ball.",
+        "infinitive_hint": "(to lose)",
+        "answer": "lost"
+      }
+    }
+  },
+  {
+    "infinitive": "make",
+    "past": "made",
+    "translation": "machen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'make'?",
+        "options": [
+          "maket",
+          "made",
+          "madeed"
+        ],
+        "answer": "made"
+      },
+      "input": {
+        "question": "Write the past simple form of 'make'.",
+        "answer": "made"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie machte ein Sandwich.'",
+        "answer": "She made a sandwich."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " a sandwich.",
+        "infinitive_hint": "(to make)",
+        "answer": "made"
+      }
+    }
+  },
+  {
+    "infinitive": "mean",
+    "past": "meant",
+    "translation": "bedeuten",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'mean'?",
+        "options": [
+          "meanted",
+          "meant",
+          "meat"
+        ],
+        "answer": "meant"
+      },
+      "input": {
+        "question": "Write the past simple form of 'mean'.",
+        "answer": "meant"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Das Wort bedeutete Liebe.'",
+        "answer": "The word meant love."
+      },
+      "gap": {
+        "before_gap": "The word ",
+        "after_gap": " love.",
+        "infinitive_hint": "(to mean)",
+        "answer": "meant"
+      }
+    }
+  },
+  {
+    "infinitive": "meet",
+    "past": "met",
+    "translation": "treffen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'meet'?",
+        "options": [
+          "met",
+          "meted",
+          "meetd"
+        ],
+        "answer": "met"
+      },
+      "input": {
+        "question": "Write the past simple form of 'meet'.",
+        "answer": "met"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir trafen den Lehrer.'",
+        "answer": "We met the teacher."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " our teacher.",
+        "infinitive_hint": "(to meet)",
+        "answer": "met"
+      }
+    }
+  },
+  {
+    "infinitive": "pay",
+    "past": "paid",
+    "translation": "bezahlen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'pay'?",
+        "options": [
+          "paid",
+          "payd",
+          "pat"
+        ],
+        "answer": "paid"
+      },
+      "input": {
+        "question": "Write the past simple form of 'pay'.",
+        "answer": "paid"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er bezahlte das Essen.'",
+        "answer": "He paid for the food."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " for the meal.",
+        "infinitive_hint": "(to pay)",
+        "answer": "paid"
+      }
+    }
+  },
+  {
+    "infinitive": "put",
+    "past": "put",
+    "translation": "legen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'put'?",
+        "options": [
+          "put",
+          "putd",
+          "putt"
+        ],
+        "answer": "put"
+      },
+      "input": {
+        "question": "Write the past simple form of 'put'.",
+        "answer": "put"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie legte das Buch hin.'",
+        "answer": "She put the book down."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " the book on the table.",
+        "infinitive_hint": "(to put)",
+        "answer": "put"
+      }
+    }
+  },
+  {
+    "infinitive": "read",
+    "past": "read",
+    "translation": "lesen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'read'?",
+        "options": [
+          "read",
+          "readt",
+          "readed"
+        ],
+        "answer": "read"
+      },
+      "input": {
+        "question": "Write the past simple form of 'read'.",
+        "answer": "read"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich las ein Buch.'",
+        "answer": "I read a book."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " a good book.",
+        "infinitive_hint": "(to read)",
+        "answer": "read"
+      }
+    }
+  },
+  {
+    "infinitive": "ride",
+    "past": "rode",
+    "translation": "fahren",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'ride'?",
+        "options": [
+          "ridt",
+          "rode",
+          "rodeed"
+        ],
+        "answer": "rode"
+      },
+      "input": {
+        "question": "Write the past simple form of 'ride'.",
+        "answer": "rode"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er ritt das Pferd.'",
+        "answer": "He rode the horse."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " his bike to school.",
+        "infinitive_hint": "(to ride)",
+        "answer": "rode"
+      }
+    }
+  },
+  {
+    "infinitive": "ring",
+    "past": "rang",
+    "translation": "klingen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'ring'?",
+        "options": [
+          "ringd",
+          "rang",
+          "ringt"
+        ],
+        "answer": "rang"
+      },
+      "input": {
+        "question": "Write the past simple form of 'ring'.",
+        "answer": "rang"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Das Telefon klingelte.'",
+        "answer": "The phone rang."
+      },
+      "gap": {
+        "before_gap": "The phone ",
+        "after_gap": " loudly.",
+        "infinitive_hint": "(to ring)",
+        "answer": "rang"
+      }
+    }
+  },
+  {
+    "infinitive": "run",
+    "past": "ran",
+    "translation": "laufen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'run'?",
+        "options": [
+          "runed",
+          "ran",
+          "runt"
+        ],
+        "answer": "ran"
+      },
+      "input": {
+        "question": "Write the past simple form of 'run'.",
+        "answer": "ran"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie rannten zum Bus.'",
+        "answer": "They ran to the bus."
+      },
+      "gap": {
+        "before_gap": "They ",
+        "after_gap": " to the bus.",
+        "infinitive_hint": "(to run)",
+        "answer": "ran"
+      }
+    }
+  },
+  {
+    "infinitive": "say",
+    "past": "said",
+    "translation": "sagen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'say'?",
+        "options": [
+          "sayed",
+          "sayd",
+          "said"
+        ],
+        "answer": "said"
+      },
+      "input": {
+        "question": "Write the past simple form of 'say'.",
+        "answer": "said"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er sagte Hallo.'",
+        "answer": "He said hello."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " hello.",
+        "infinitive_hint": "(to say)",
+        "answer": "said"
+      }
+    }
+  },
+  {
+    "infinitive": "see",
+    "past": "saw",
+    "translation": "sehen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'see'?",
+        "options": [
+          "seeed",
+          "saw",
+          "seet"
+        ],
+        "answer": "saw"
+      },
+      "input": {
+        "question": "Write the past simple form of 'see'.",
+        "answer": "saw"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir sahen einen Vogel.'",
+        "answer": "We saw a bird."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " a bird.",
+        "infinitive_hint": "(to see)",
+        "answer": "saw"
+      }
+    }
+  },
+  {
+    "infinitive": "sell",
+    "past": "sold",
+    "translation": "verkaufen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'sell'?",
+        "options": [
+          "selld",
+          "sellt",
+          "sold"
+        ],
+        "answer": "sold"
+      },
+      "input": {
+        "question": "Write the past simple form of 'sell'.",
+        "answer": "sold"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich verkaufte mein Fahrrad.'",
+        "answer": "I sold my bike."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " my bike.",
+        "infinitive_hint": "(to sell)",
+        "answer": "sold"
+      }
+    }
+  },
+  {
+    "infinitive": "send",
+    "past": "sent",
+    "translation": "senden",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'send'?",
+        "options": [
+          "sent",
+          "sendt",
+          "sended"
+        ],
+        "answer": "sent"
+      },
+      "input": {
+        "question": "Write the past simple form of 'send'.",
+        "answer": "sent"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie schickte einen Brief.'",
+        "answer": "She sent a letter."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " a letter.",
+        "infinitive_hint": "(to send)",
+        "answer": "sent"
+      }
+    }
+  },
+  {
+    "infinitive": "set",
+    "past": "set",
+    "translation": "setzen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'set'?",
+        "options": [
+          "setd",
+          "set",
+          "sett"
+        ],
+        "answer": "set"
+      },
+      "input": {
+        "question": "Write the past simple form of 'set'.",
+        "answer": "set"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er stellte die Uhr.'",
+        "answer": "He set the clock."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the clock.",
+        "infinitive_hint": "(to set)",
+        "answer": "set"
+      }
+    }
+  },
+  {
+    "infinitive": "sew",
+    "past": "sewed",
+    "translation": "nähen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'sew'?",
+        "options": [
+          "set",
+          "seweded",
+          "sewed"
+        ],
+        "answer": "sewed"
+      },
+      "input": {
+        "question": "Write the past simple form of 'sew'.",
+        "answer": "sewed"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich nähte ein Kleid.'",
+        "answer": "I sewed a dress."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " a dress.",
+        "infinitive_hint": "(to sew)",
+        "answer": "sewed"
+      }
+    }
+  },
+  {
+    "infinitive": "shine",
+    "past": "shone",
+    "translation": "scheinen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'shine'?",
+        "options": [
+          "shoneed",
+          "shone",
+          "shined"
+        ],
+        "answer": "shone"
+      },
+      "input": {
+        "question": "Write the past simple form of 'shine'.",
+        "answer": "shone"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Die Sonne schien.'",
+        "answer": "The sun shone."
+      },
+      "gap": {
+        "before_gap": "The sun ",
+        "after_gap": " brightly.",
+        "infinitive_hint": "(to shine)",
+        "answer": "shone"
+      }
+    }
+  },
+  {
+    "infinitive": "show",
+    "past": "showed",
+    "translation": "zeigen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'show'?",
+        "options": [
+          "showt",
+          "showed",
+          "showd"
+        ],
+        "answer": "showed"
+      },
+      "input": {
+        "question": "Write the past simple form of 'show'.",
+        "answer": "showed"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er zeigte das Bild.'",
+        "answer": "He showed the picture."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the picture.",
+        "infinitive_hint": "(to show)",
+        "answer": "showed"
+      }
+    }
+  },
+  {
+    "infinitive": "sing",
+    "past": "sang",
+    "translation": "singen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'sing'?",
+        "options": [
+          "sang",
+          "singt",
+          "singed"
+        ],
+        "answer": "sang"
+      },
+      "input": {
+        "question": "Write the past simple form of 'sing'.",
+        "answer": "sang"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie sang ein Lied.'",
+        "answer": "She sang a song."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " a song.",
+        "infinitive_hint": "(to sing)",
+        "answer": "sang"
+      }
+    }
+  },
+  {
+    "infinitive": "sit",
+    "past": "sat",
+    "translation": "sitzen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'sit'?",
+        "options": [
+          "sated",
+          "sitd",
+          "sat"
+        ],
+        "answer": "sat"
+      },
+      "input": {
+        "question": "Write the past simple form of 'sit'.",
+        "answer": "sat"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich saß auf dem Stuhl.'",
+        "answer": "I sat on the chair."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " on the chair.",
+        "infinitive_hint": "(to sit)",
+        "answer": "sat"
+      }
+    }
+  },
+  {
+    "infinitive": "sleep",
+    "past": "slept",
+    "translation": "schlafen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'sleep'?",
+        "options": [
+          "slepted",
+          "sleepd",
+          "slept"
+        ],
+        "answer": "slept"
+      },
+      "input": {
+        "question": "Write the past simple form of 'sleep'.",
+        "answer": "slept"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er schlief tief.'",
+        "answer": "He slept deeply."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " well.",
+        "infinitive_hint": "(to sleep)",
+        "answer": "slept"
+      }
+    }
+  },
+  {
+    "infinitive": "smell",
+    "past": "smelt/smelled",
+    "translation": "riechen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'smell'?",
+        "options": [
+          "smelt/smelled",
+          "smelld",
+          "smelt"
+        ],
+        "answer": "smelt/smelled"
+      },
+      "input": {
+        "question": "Write the past simple form of 'smell'.",
+        "answer": "smelt/smelled"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich roch Blumen.'",
+        "answer": "I smelt/smelled flowers."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " the flowers.",
+        "infinitive_hint": "(to smell)",
+        "answer": "smelt/smelled"
+      }
+    }
+  },
+  {
+    "infinitive": "speak",
+    "past": "spoke",
+    "translation": "sprechen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'speak'?",
+        "options": [
+          "spoke",
+          "speaked",
+          "spokeed"
+        ],
+        "answer": "spoke"
+      },
+      "input": {
+        "question": "Write the past simple form of 'speak'.",
+        "answer": "spoke"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir sprachen Englisch.'",
+        "answer": "We spoke English."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " English.",
+        "infinitive_hint": "(to speak)",
+        "answer": "spoke"
+      }
+    }
+  },
+  {
+    "infinitive": "spell",
+    "past": "spelt/spelled",
+    "translation": "buchstabieren",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'spell'?",
+        "options": [
+          "spelt/spelled",
+          "spelt/spelleded",
+          "spelt"
+        ],
+        "answer": "spelt/spelled"
+      },
+      "input": {
+        "question": "Write the past simple form of 'spell'.",
+        "answer": "spelt/spelled"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie buchstabierte das Wort.'",
+        "answer": "She spelt/spelled the word."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " the word.",
+        "infinitive_hint": "(to spell)",
+        "answer": "spelt/spelled"
+      }
+    }
+  },
+  {
+    "infinitive": "spend",
+    "past": "spent",
+    "translation": "ausgeben",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'spend'?",
+        "options": [
+          "spented",
+          "spendt",
+          "spent"
+        ],
+        "answer": "spent"
+      },
+      "input": {
+        "question": "Write the past simple form of 'spend'.",
+        "answer": "spent"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er gab das Geld aus.'",
+        "answer": "He spent the money."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the money.",
+        "infinitive_hint": "(to spend)",
+        "answer": "spent"
+      }
+    }
+  },
+  {
+    "infinitive": "stand",
+    "past": "stood",
+    "translation": "stehen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'stand'?",
+        "options": [
+          "standed",
+          "standt",
+          "stood"
+        ],
+        "answer": "stood"
+      },
+      "input": {
+        "question": "Write the past simple form of 'stand'.",
+        "answer": "stood"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich stand am Fenster.'",
+        "answer": "I stood at the window."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " by the window.",
+        "infinitive_hint": "(to stand)",
+        "answer": "stood"
+      }
+    }
+  },
+  {
+    "infinitive": "steal",
+    "past": "stole",
+    "translation": "stehlen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'steal'?",
+        "options": [
+          "stole",
+          "stealed",
+          "stealt"
+        ],
+        "answer": "stole"
+      },
+      "input": {
+        "question": "Write the past simple form of 'steal'.",
+        "answer": "stole"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er stahl das Buch.'",
+        "answer": "He stole the book."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the book.",
+        "infinitive_hint": "(to steal)",
+        "answer": "stole"
+      }
+    }
+  },
+  {
+    "infinitive": "swim",
+    "past": "swam",
+    "translation": "schwimmen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'swim'?",
+        "options": [
+          "swimt",
+          "swamed",
+          "swam"
+        ],
+        "answer": "swam"
+      },
+      "input": {
+        "question": "Write the past simple form of 'swim'.",
+        "answer": "swam"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir schwammen im See.'",
+        "answer": "We swam in the lake."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " in the lake.",
+        "infinitive_hint": "(to swim)",
+        "answer": "swam"
+      }
+    }
+  },
+  {
+    "infinitive": "take",
+    "past": "took",
+    "translation": "nehmen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'take'?",
+        "options": [
+          "took",
+          "taked",
+          "tooked"
+        ],
+        "answer": "took"
+      },
+      "input": {
+        "question": "Write the past simple form of 'take'.",
+        "answer": "took"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie nahm den Apfel.'",
+        "answer": "She took the apple."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " the apple.",
+        "infinitive_hint": "(to take)",
+        "answer": "took"
+      }
+    }
+  },
+  {
+    "infinitive": "teach",
+    "past": "taught",
+    "translation": "unterrichten",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'teach'?",
+        "options": [
+          "taught",
+          "teached",
+          "taughted"
+        ],
+        "answer": "taught"
+      },
+      "input": {
+        "question": "Write the past simple form of 'teach'.",
+        "answer": "taught"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er lehrte die Kinder.'",
+        "answer": "He taught the children."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " the children.",
+        "infinitive_hint": "(to teach)",
+        "answer": "taught"
+      }
+    }
+  },
+  {
+    "infinitive": "tell",
+    "past": "told",
+    "translation": "erzählen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'tell'?",
+        "options": [
+          "telled",
+          "tolded",
+          "told"
+        ],
+        "answer": "told"
+      },
+      "input": {
+        "question": "Write the past simple form of 'tell'.",
+        "answer": "told"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich erzählte die Geschichte.'",
+        "answer": "I told the story."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " the story.",
+        "infinitive_hint": "(to tell)",
+        "answer": "told"
+      }
+    }
+  },
+  {
+    "infinitive": "think",
+    "past": "thought",
+    "translation": "denken",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'think'?",
+        "options": [
+          "thint",
+          "thought",
+          "thinkd"
+        ],
+        "answer": "thought"
+      },
+      "input": {
+        "question": "Write the past simple form of 'think'.",
+        "answer": "thought"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich dachte an dich.'",
+        "answer": "I thought of you."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " of you.",
+        "infinitive_hint": "(to think)",
+        "answer": "thought"
+      }
+    }
+  },
+  {
+    "infinitive": "throw",
+    "past": "threw",
+    "translation": "werfen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'throw'?",
+        "options": [
+          "throwd",
+          "threw",
+          "threwed"
+        ],
+        "answer": "threw"
+      },
+      "input": {
+        "question": "Write the past simple form of 'throw'.",
+        "answer": "threw"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich warf den Ball.'",
+        "answer": "I threw the ball."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " the ball.",
+        "infinitive_hint": "(to throw)",
+        "answer": "threw"
+      }
+    }
+  },
+  {
+    "infinitive": "understand",
+    "past": "understood",
+    "translation": "verstehen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'understand'?",
+        "options": [
+          "understood",
+          "understooded",
+          "understandt"
+        ],
+        "answer": "understood"
+      },
+      "input": {
+        "question": "Write the past simple form of 'understand'.",
+        "answer": "understood"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich verstand die Aufgabe.'",
+        "answer": "I understood the task."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " the question.",
+        "infinitive_hint": "(to understand)",
+        "answer": "understood"
+      }
+    }
+  },
+  {
+    "infinitive": "wake",
+    "past": "woke",
+    "translation": "wecken",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'wake'?",
+        "options": [
+          "wokeed",
+          "wakt",
+          "woke"
+        ],
+        "answer": "woke"
+      },
+      "input": {
+        "question": "Write the past simple form of 'wake'.",
+        "answer": "woke"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Er wachte früh auf.'",
+        "answer": "He woke up early."
+      },
+      "gap": {
+        "before_gap": "He ",
+        "after_gap": " up early.",
+        "infinitive_hint": "(to wake)",
+        "answer": "woke"
+      }
+    }
+  },
+  {
+    "infinitive": "wear",
+    "past": "wore",
+    "translation": "anhaben",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'wear'?",
+        "options": [
+          "weared",
+          "weart",
+          "wore"
+        ],
+        "answer": "wore"
+      },
+      "input": {
+        "question": "Write the past simple form of 'wear'.",
+        "answer": "wore"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Sie trug ein rotes Kleid.'",
+        "answer": "She wore a red dress."
+      },
+      "gap": {
+        "before_gap": "She ",
+        "after_gap": " a red dress.",
+        "infinitive_hint": "(to wear)",
+        "answer": "wore"
+      }
+    }
+  },
+  {
+    "infinitive": "win",
+    "past": "won",
+    "translation": "gewinnen",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'win'?",
+        "options": [
+          "won",
+          "wind",
+          "woned"
+        ],
+        "answer": "won"
+      },
+      "input": {
+        "question": "Write the past simple form of 'win'.",
+        "answer": "won"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Wir gewannen das Spiel.'",
+        "answer": "We won the game."
+      },
+      "gap": {
+        "before_gap": "We ",
+        "after_gap": " the game.",
+        "infinitive_hint": "(to win)",
+        "answer": "won"
+      }
+    }
+  },
+  {
+    "infinitive": "write",
+    "past": "wrote",
+    "translation": "schreiben",
+    "exercises": {
+      "multiple_choice": {
+        "question": "What is the past simple form of 'write'?",
+        "options": [
+          "wrote",
+          "writed",
+          "writet"
+        ],
+        "answer": "wrote"
+      },
+      "input": {
+        "question": "Write the past simple form of 'write'.",
+        "answer": "wrote"
+      },
+      "translation": {
+        "question": "Wie heißt auf Englisch: 'Ich schrieb einen Brief.'",
+        "answer": "I wrote a letter."
+      },
+      "gap": {
+        "before_gap": "I ",
+        "after_gap": " a letter.",
+        "infinitive_hint": "(to write)",
+        "answer": "wrote"
+      }
+    }
+  }
+]
