@@ -33,6 +33,9 @@ async function init() {
     return;
   }
   
+  // Sync new verbs (initialize any new verbs added to JSON)
+  progress = storage.syncNewVerbs(progress, verbs);
+  
   // Update summary
   updateStarSummary();
   

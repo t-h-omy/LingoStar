@@ -10,10 +10,30 @@ let exerciseData = {};
 export async function loadVerbs() {
   try {
     const response = await fetch('data/verbs.json');
-    verbs = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    
+    // Validate JSON structure
+    if (!Array.isArray(data)) {
+      throw new Error('Verbs data must be an array');
+    }
+    
+    // Validate each verb has required fields
+    data.forEach((verb, index) => {
+      if (!verb.infinitive || !verb.past || !verb.translation) {
+        console.warn(`Verb at index ${index} is missing required fields:`, verb);
+      }
+    });
+    
+    verbs = data;
+    console.log(`Loaded ${verbs.length} verbs successfully`);
     return verbs;
   } catch (e) {
     console.error('Failed to load verbs:', e);
+    // Show user-friendly error message
+    alert('Failed to load exercises. Please refresh the page or check your internet connection.');
     return [];
   }
 }
@@ -254,6 +274,15 @@ export function checkAnswer(userAnswer, correctAnswer) {
   
   // Exact match
   if (normalizedUser === normalizedCorrect) {
+    return true;
+  }
+  
+  // Remove trailing punctuation for comparison (be lenient with periods, exclamation marks, etc.)
+  const removePunctuation = (str) => str.replace(/[.,!?;:]$/g, '');
+  const userNoPunct = removePunctuation(normalizedUser);
+  const correctNoPunct = removePunctuation(normalizedCorrect);
+  
+  if (userNoPunct === correctNoPunct) {
     return true;
   }
   
