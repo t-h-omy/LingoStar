@@ -15,7 +15,10 @@
       },
       "input": {
         "question": "Write the past simple form of 'be'.",
-        "answer": "was/were"
+        "answer": [
+          "was",
+          "were"
+        ]
       },
       "translation": {
         "question": "Wie heißt auf Englisch: 'Er war in der Schule.'",
@@ -285,17 +288,26 @@
       },
       "input": {
         "question": "Write the past simple form of 'burn'.",
-        "answer": "burnt/burned"
+        "answer": [
+          "burnt",
+          "burned"
+        ]
       },
       "translation": {
         "question": "Wie heißt auf Englisch: 'Er verbrannte sich.'",
-        "answer": "He burnt/burned himself."
+        "answer": [
+          "He burnt himself.",
+          "He burned himself."
+        ]
       },
       "gap": {
         "before_gap": "He ",
         "after_gap": " his hand on the stove.",
         "infinitive_hint": "(to burn)",
-        "answer": "burnt/burned"
+        "answer": [
+          "burnt",
+          "burned"
+        ]
       }
     }
   },
@@ -795,17 +807,26 @@
       },
       "input": {
         "question": "Write the past simple form of 'fit'.",
-        "answer": "fit/fitted"
+        "answer": [
+          "fit",
+          "fitted"
+        ]
       },
       "translation": {
         "question": "Wie heißt auf Englisch: 'Das Hemd passte gut.'",
-        "answer": "The shirt fit/fitted well."
+        "answer": [
+          "The shirt fit well.",
+          "The shirt fitted well."
+        ]
       },
       "gap": {
         "before_gap": "The shirt ",
         "after_gap": " well.",
         "infinitive_hint": "(to fit)",
-        "answer": "fit/fitted"
+        "answer": [
+          "fit",
+          "fitted"
+        ]
       }
     }
   },
@@ -1335,17 +1356,26 @@
       },
       "input": {
         "question": "Write the past simple form of 'learn'.",
-        "answer": "learnt/learned"
+        "answer": [
+          "learnt",
+          "learned"
+        ]
       },
       "translation": {
         "question": "Wie heißt auf Englisch: 'Wir lernten Englisch.'",
-        "answer": "We learnt/learned English."
+        "answer": [
+          "We learnt English.",
+          "We learned English."
+        ]
       },
       "gap": {
         "before_gap": "We ",
         "after_gap": " English.",
         "infinitive_hint": "(to learn)",
-        "answer": "learnt/learned"
+        "answer": [
+          "learnt",
+          "learned"
+        ]
       }
     }
   },
@@ -2085,17 +2115,26 @@
       },
       "input": {
         "question": "Write the past simple form of 'smell'.",
-        "answer": "smelt/smelled"
+        "answer": [
+          "smelt",
+          "smelled"
+        ]
       },
       "translation": {
         "question": "Wie heißt auf Englisch: 'Ich roch Blumen.'",
-        "answer": "I smelt/smelled flowers."
+        "answer": [
+          "I smelt flowers.",
+          "I smelled flowers."
+        ]
       },
       "gap": {
         "before_gap": "I ",
         "after_gap": " the flowers.",
         "infinitive_hint": "(to smell)",
-        "answer": "smelt/smelled"
+        "answer": [
+          "smelt",
+          "smelled"
+        ]
       }
     }
   },
@@ -2145,17 +2184,26 @@
       },
       "input": {
         "question": "Write the past simple form of 'spell'.",
-        "answer": "spelt/spelled"
+        "answer": [
+          "spelt",
+          "spelled"
+        ]
       },
       "translation": {
         "question": "Wie heißt auf Englisch: 'Sie buchstabierte das Wort.'",
-        "answer": "She spelt/spelled the word."
+        "answer": [
+          "She spelt the word.",
+          "She spelled the word."
+        ]
       },
       "gap": {
         "before_gap": "She ",
         "after_gap": " the word.",
         "infinitive_hint": "(to spell)",
-        "answer": "spelt/spelled"
+        "answer": [
+          "spelt",
+          "spelled"
+        ]
       }
     }
   },
