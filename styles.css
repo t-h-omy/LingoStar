@@ -348,6 +348,8 @@ body {
   opacity: 0.6;
   background: #f0f0f0;
 }
+
+.option-button {
   width: 100%;
   max-width: 400px;
   padding: 15px 25px;
@@ -377,7 +379,7 @@ body {
   cursor: not-allowed;
 }
 
-.option-button {
+/* Bottom Bar */
 #bottom-bar {
   padding: 20px;
   padding-bottom: calc(20px + env(safe-area-inset-bottom)); /* Account for device safe areas */
