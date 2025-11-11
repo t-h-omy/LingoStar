@@ -1,6 +1,7 @@
 {
   "name": "LingoStar",
   "short_name": "LingoStar",
+  "version": "1.5.0",
   "description": "Practice English irregular verbs with a fun star system",
   "start_url": "./",
   "display": "standalone",

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lingostar-v1.4.0';
+const CACHE_NAME = 'lingostar-v1.5.0';
 const urlsToCache = [
   './',
   './index.html',
@@ -13,17 +13,41 @@ const urlsToCache = [
   './assets/sounds/sfx_freeze.mp3',
   './assets/sounds/sfx_unfreeze.mp3',
   './assets/images/star_neutral_384.png',
+  './assets/images/star_neutral_384_32.png',
+  './assets/images/star_neutral_384_64.png',
   './assets/images/star_yellow_384.png',
+  './assets/images/star_yellow_384_32.png',
+  './assets/images/star_yellow_384_64.png',
   './assets/images/star_yellow_384_frozen.png',
+  './assets/images/star_yellow_384_frozen_32.png',
+  './assets/images/star_yellow_384_frozen_64.png',
   './assets/images/star_rosa_384.png',
+  './assets/images/star_rosa_384_32.png',
+  './assets/images/star_rosa_384_64.png',
   './assets/images/star_rosa_384_frozen.png',
+  './assets/images/star_rosa_384_frozen_32.png',
+  './assets/images/star_rosa_384_frozen_64.png',
   './assets/images/star_blue_384.png',
+  './assets/images/star_blue_384_32.png',
+  './assets/images/star_blue_384_64.png',
   './assets/images/star_blue_384_frozen.png',
+  './assets/images/star_blue_384_frozen_32.png',
+  './assets/images/star_blue_384_frozen_64.png',
   './assets/images/star_purple_384.png',
+  './assets/images/star_purple_384_32.png',
+  './assets/images/star_purple_384_64.png',
   './assets/images/star_purple_384_frozen.png',
+  './assets/images/star_purple_384_frozen_32.png',
+  './assets/images/star_purple_384_frozen_64.png',
   './assets/images/star_orange_384.png',
+  './assets/images/star_orange_384_32.png',
+  './assets/images/star_orange_384_64.png',
   './assets/images/star_orange_384_frozen.png',
-  './assets/images/star_broken_384.png'
+  './assets/images/star_orange_384_frozen_32.png',
+  './assets/images/star_orange_384_frozen_64.png',
+  './assets/images/star_broken_384.png',
+  './assets/images/star_broken_384_32.png',
+  './assets/images/star_broken_384_64.png'
 ];
 
 // Install event - cache resources

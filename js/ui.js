@@ -18,11 +18,13 @@ Object.values(sounds).forEach(sound => {
  * Get star image path based on level and state
  * @param {number} level - Star level (0-5)
  * @param {string} state - Star state (active, frozen, broken)
+ * @param {number} size - Image size (32, 64, 96, 128, 256, or 384 for full size)
  * @returns {string} Path to star image
  */
-function getStarImage(level, state) {
+function getStarImage(level, state, size = 384) {
   if (state === 'broken') {
-    return 'assets/images/star_broken_384.png';
+    const sizeStr = size === 384 ? '' : `_${size}`;
+    return `assets/images/star_broken_384${sizeStr}.png`;
   }
   
   const colorMap = {
@@ -36,8 +38,9 @@ function getStarImage(level, state) {
   
   const color = colorMap[level] || 'neutral';
   const frozen = (state === 'frozen') ? '_frozen' : '';
+  const sizeStr = size === 384 ? '' : `_${size}`;
   
-  return `assets/images/star_${color}_384${frozen}.png`;
+  return `assets/images/star_${color}_384${frozen}${sizeStr}.png`;
 }
 
 /**
@@ -64,36 +67,26 @@ function getStarColor(level) {
 export function renderStarSummary(summary) {
   const container = document.getElementById('star-summary');
   
-  container.innerHTML = `
-    <div class="summary-item">
-      <span class="star-icon broken">★</span>
-      <span class="count">${summary.broken}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon outline">☆</span>
-      <span class="count">${summary.outline}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon yellow">★</span>
-      <span class="count">${summary.yellow}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon pink">★</span>
-      <span class="count">${summary.pink}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon blue">★</span>
-      <span class="count">${summary.blue}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon purple">★</span>
-      <span class="count">${summary.purple}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon golden">★</span>
-      <span class="count">${summary.golden}</span>
-    </div>
-  `;
+  // Define the star types and their corresponding level/state
+  const starTypes = [
+    { key: 'broken', level: 0, state: 'broken', count: summary.broken },
+    { key: 'outline', level: 0, state: 'active', count: summary.outline },
+    { key: 'yellow', level: 1, state: 'active', count: summary.yellow },
+    { key: 'pink', level: 2, state: 'active', count: summary.pink },
+    { key: 'blue', level: 3, state: 'active', count: summary.blue },
+    { key: 'purple', level: 4, state: 'active', count: summary.purple },
+    { key: 'golden', level: 5, state: 'active', count: summary.golden }
+  ];
+  
+  container.innerHTML = starTypes.map(star => {
+    const imagePath = getStarImage(star.level, star.state, 32);
+    return `
+      <div class="summary-item">
+        <img src="${imagePath}" alt="${star.key} star" class="summary-star-icon" />
+        <span class="count">${star.count}</span>
+      </div>
+    `;
+  }).join('');
 }
 
 /**
@@ -103,6 +96,11 @@ export function renderStarSummary(summary) {
  */
 export function renderCurrentStar(verbState, infinitive) {
   const container = document.getElementById('current-star');
+  
+  // Clean up any existing ice overlays before re-rendering
+  const existingOverlays = container.querySelectorAll('.ice-overlay');
+  existingOverlays.forEach(overlay => overlay.remove());
+  
   const starImage = getStarImage(verbState.level, verbState.state);
   const frozenClass = verbState.state === 'frozen' ? 'frozen' : '';
   const brokenClass = verbState.state === 'broken' ? 'broken' : '';
@@ -267,18 +265,163 @@ export function playSound(soundType) {
 }
 
 /**
- * Animate star transition
- * @param {string} transitionType - Type of transition (levelUp, freeze, break, reset)
+ * Animate star transition with enhanced effects
+ * @param {string} transitionType - Type of transition (levelUp, freeze, break, unfreeze, reset, recover)
  */
 export function animateStarTransition(transitionType) {
   const starElement = document.querySelector('.current-star-display');
   if (!starElement) return;
   
-  starElement.classList.add(`star-${transitionType}`);
+  const starImage = starElement.querySelector('.star-image');
+  if (!starImage) return;
+  
+  switch (transitionType) {
+    case 'levelUp':
+      animateLevelUp(starElement, starImage);
+      break;
+    case 'freeze':
+      animateFreeze(starElement, starImage);
+      break;
+    case 'unfreeze':
+      // Defrost uses same animation as level-up
+      animateLevelUp(starElement, starImage);
+      break;
+    case 'break':
+      animateBreak(starElement, starImage);
+      break;
+    case 'reset':
+      starElement.classList.add('star-reset');
+      setTimeout(() => starElement.classList.remove('star-reset'), 600);
+      break;
+    case 'recover':
+      starElement.classList.add('star-recover');
+      setTimeout(() => starElement.classList.remove('star-recover'), 600);
+      break;
+  }
+}
+
+/**
+ * Animate level-up: spin old star out, bounce new star in with sparkles
+ * @param {HTMLElement} starElement - Star container element
+ * @param {HTMLElement} starImage - Star image element
+ */
+function animateLevelUp(starElement, starImage) {
+  const oldSrc = starImage.src;
+  
+  // Phase 1: Spin out old star (400ms)
+  starImage.style.animation = 'starSpinOut 0.4s ease-in forwards';
   
   setTimeout(() => {
-    starElement.classList.remove(`star-${transitionType}`);
+    // Phase 2: Bounce in new star (400ms)
+    starImage.style.animation = 'starBounceIn 0.4s ease-out forwards';
+    
+    // Create sparkle effect
+    createSparkles(starElement);
+  }, 400);
+  
+  // Clean up
+  setTimeout(() => {
+    starImage.style.animation = '';
+  }, 800);
+}
+
+/**
+ * Animate freeze: 3-step opacity transition
+ * @param {HTMLElement} starElement - Star container element
+ * @param {HTMLElement} starImage - Star image element
+ */
+function animateFreeze(starElement, starImage) {
+  const container = starImage.parentElement;
+  
+  // Create ice overlay element
+  const iceOverlay = document.createElement('img');
+  iceOverlay.className = 'ice-overlay';
+  iceOverlay.style.position = 'absolute';
+  iceOverlay.style.top = '0';
+  iceOverlay.style.left = '0';
+  iceOverlay.style.width = '100%';
+  iceOverlay.style.height = '100%';
+  iceOverlay.style.opacity = '0';
+  iceOverlay.style.transition = 'opacity 0.15s ease';
+  iceOverlay.style.pointerEvents = 'none';
+  
+  // Set the frozen version of the current star
+  const currentSrc = starImage.src;
+  const frozenSrc = currentSrc.replace('.png', '_frozen.png').replace('_frozen_frozen', '_frozen');
+  iceOverlay.src = frozenSrc;
+  
+  container.style.position = 'relative';
+  container.appendChild(iceOverlay);
+  
+  // Step 1: 33% opacity
+  setTimeout(() => {
+    iceOverlay.style.opacity = '0.33';
+  }, 50);
+  
+  // Step 2: 66% opacity
+  setTimeout(() => {
+    iceOverlay.style.opacity = '0.66';
+  }, 200);
+  
+  // Step 3: 100% opacity
+  setTimeout(() => {
+    iceOverlay.style.opacity = '1';
+  }, 350);
+  
+  // Clean up overlay after animation completes (keep it visible)
+  setTimeout(() => {
+    // Remove transition for instant updates
+    iceOverlay.style.transition = 'none';
+  }, 500);
+}
+
+/**
+ * Animate break: broken star bounces in, outline pushed away
+ * @param {HTMLElement} starElement - Star container element
+ * @param {HTMLElement} starImage - Star image element
+ */
+function animateBreak(starElement, starImage) {
+  // Apply broken star animation
+  starElement.classList.add('star-break');
+  
+  setTimeout(() => {
+    starElement.classList.remove('star-break');
   }, 600);
+}
+
+/**
+ * Create sparkle particle effects around the star
+ * @param {HTMLElement} container - Container element for sparkles
+ */
+function createSparkles(container) {
+  const sparkleCount = 8;
+  const containerRect = container.getBoundingClientRect();
+  const centerX = containerRect.width / 2;
+  const centerY = containerRect.height / 2;
+  
+  for (let i = 0; i < sparkleCount; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle-particle';
+    
+    // Calculate random direction
+    const angle = (i / sparkleCount) * 2 * Math.PI;
+    const distance = 40 + Math.random() * 20;
+    const xOffset = Math.cos(angle) * distance;
+    const yOffset = Math.sin(angle) * distance;
+    
+    sparkle.style.setProperty('--sparkle-x', `${xOffset}px`);
+    sparkle.style.setProperty('--sparkle-y', `${yOffset}px`);
+    sparkle.style.left = `${centerX}px`;
+    sparkle.style.top = `${centerY}px`;
+    
+    container.style.position = 'relative';
+    container.appendChild(sparkle);
+    
+    // Remove sparkle after animation
+    setTimeout(() => {
+      sparkle.remove();
+    }, 600);
+  }
 }
 
 /**
@@ -319,20 +462,12 @@ export function setOkButton(text, onClick) {
 }
 
 /**
- * Get star display for dictionary (emoji representation)
+ * Get star display for dictionary (real star image)
  * @param {Object} verbState - State of the verb
- * @returns {string} Star emoji
+ * @returns {string} Star image HTML
  */
 export function getStarDisplayForDictionary(verbState) {
-  if (verbState.state === 'broken') {
-    return '💔'; // Broken heart/star
-  } else if (verbState.state === 'frozen') {
-    return '❄️'; // Frozen
-  } else if (verbState.level === 0) {
-    return '☆'; // Outline star
-  } else {
-    // Colored stars based on level
-    const colors = ['', '⭐', '💗', '💙', '💜', '🌟'];
-    return colors[verbState.level] || '☆';
-  }
+  const imagePath = getStarImage(verbState.level, verbState.state, 64);
+  const frozenClass = verbState.state === 'frozen' ? 'frozen-dict' : '';
+  return `<img src="${imagePath}" alt="star" class="dictionary-star-image ${frozenClass}" />`;
 }
