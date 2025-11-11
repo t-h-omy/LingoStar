@@ -96,11 +96,6 @@ export function renderStarSummary(summary) {
  */
 export function renderCurrentStar(verbState, infinitive) {
   const container = document.getElementById('current-star');
-  
-  // Clean up any existing ice overlays before re-rendering
-  const existingOverlays = container.querySelectorAll('.ice-overlay');
-  existingOverlays.forEach(overlay => overlay.remove());
-  
   const starImage = getStarImage(verbState.level, verbState.state);
   const frozenClass = verbState.state === 'frozen' ? 'frozen' : '';
   const brokenClass = verbState.state === 'broken' ? 'broken' : '';
@@ -301,28 +296,21 @@ export function animateStarTransition(transitionType) {
 }
 
 /**
- * Animate level-up: spin old star out, bounce new star in with sparkles
+ * Animate level-up: bounce new star in with sparkles
  * @param {HTMLElement} starElement - Star container element
  * @param {HTMLElement} starImage - Star image element
  */
 function animateLevelUp(starElement, starImage) {
-  const oldSrc = starImage.src;
+  // Apply bounce-in animation to the newly rendered star
+  starImage.style.animation = 'starBounceIn 0.6s ease-out forwards';
   
-  // Phase 1: Spin out old star (400ms)
-  starImage.style.animation = 'starSpinOut 0.4s ease-in forwards';
-  
-  setTimeout(() => {
-    // Phase 2: Bounce in new star (400ms)
-    starImage.style.animation = 'starBounceIn 0.4s ease-out forwards';
-    
-    // Create sparkle effect
-    createSparkles(starElement);
-  }, 400);
+  // Create sparkle effect
+  createSparkles(starElement);
   
   // Clean up
   setTimeout(() => {
     starImage.style.animation = '';
-  }, 800);
+  }, 600);
 }
 
 /**
@@ -333,7 +321,17 @@ function animateLevelUp(starElement, starImage) {
 function animateFreeze(starElement, starImage) {
   const container = starImage.parentElement;
   
-  // Create ice overlay element
+  // The star image is already the frozen version, so we need to:
+  // 1. Temporarily show the non-frozen version
+  // 2. Overlay with the frozen version at increasing opacity
+  
+  const frozenSrc = starImage.src;
+  const nonFrozenSrc = frozenSrc.replace('_frozen', '');
+  
+  // Temporarily swap to non-frozen image
+  starImage.src = nonFrozenSrc;
+  
+  // Create ice overlay element with the frozen version
   const iceOverlay = document.createElement('img');
   iceOverlay.className = 'ice-overlay';
   iceOverlay.style.position = 'absolute';
@@ -344,10 +342,6 @@ function animateFreeze(starElement, starImage) {
   iceOverlay.style.opacity = '0';
   iceOverlay.style.transition = 'opacity 0.15s ease';
   iceOverlay.style.pointerEvents = 'none';
-  
-  // Set the frozen version of the current star
-  const currentSrc = starImage.src;
-  const frozenSrc = currentSrc.replace('.png', '_frozen.png').replace('_frozen_frozen', '_frozen');
   iceOverlay.src = frozenSrc;
   
   container.style.position = 'relative';
@@ -368,10 +362,10 @@ function animateFreeze(starElement, starImage) {
     iceOverlay.style.opacity = '1';
   }, 350);
   
-  // Clean up overlay after animation completes (keep it visible)
+  // After animation, swap back to frozen image and remove overlay
   setTimeout(() => {
-    // Remove transition for instant updates
-    iceOverlay.style.transition = 'none';
+    starImage.src = frozenSrc;
+    iceOverlay.remove();
   }, 500);
 }
 
