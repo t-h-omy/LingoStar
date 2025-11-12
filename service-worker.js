@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lingostar-v1.5.1';
+const CACHE_NAME = 'lingostar-v1.6.0';
 const urlsToCache = [
   './',
   './index.html',
@@ -13,6 +13,7 @@ const urlsToCache = [
   './assets/sounds/sfx_incorrect.mp3',
   './assets/sounds/sfx_freeze.mp3',
   './assets/sounds/sfx_unfreeze.mp3',
+  './assets/sounds/sfx_break.mp3',
   './assets/images/star_neutral_384.png',
   './assets/images/star_neutral_384_32.png',
   './assets/images/star_neutral_384_64.png',
