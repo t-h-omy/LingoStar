@@ -13,6 +13,7 @@ let exerciseCount = 0;
 let deferredPrompt = null;
 let soundEnabled = true; // Sound setting
 let okButtonHandler = null; // Track the current OK button handler
+let currentStarSummary = null; // Track current star summary for animations
 
 /**
  * Initialize the app
@@ -186,8 +187,10 @@ function maybeShowInstallPrompt() {
  */
 function updateStarSummary() {
   const verbs = exercises.getVerbs();
+  const previousSummary = currentStarSummary;
   const summary = storage.getStarSummary(progress, verbs);
-  ui.renderStarSummary(summary);
+  currentStarSummary = summary;
+  ui.renderStarSummary(summary, previousSummary);
 }
 
 /**
