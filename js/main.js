@@ -241,12 +241,12 @@ function handleSubmitAnswer() {
   
   ui.disableAnswerInput();
   
-  // Animate star transition
-  animateStateTransition(oldState, newState, isCorrect);
-  
-  // Update displays
+  // Update displays first
   ui.renderCurrentStar(newState, currentVerb.infinitive);
   updateStarSummary();
+  
+  // Animate star transition after rendering
+  animateStateTransition(oldState, newState, isCorrect);
   
   // If frozen star behavior triggered, we need to repeat the same exercise
   if (shouldRepeat) {

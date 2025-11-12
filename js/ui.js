@@ -1,5 +1,7 @@
 // ui.js - Manages DOM updates and rendering
 
+import { ANIMATION_CONFIG, getAdjustedDuration } from './animationConfig.js';
+
 // Preload sound effects
 const sounds = {
   correct: new Audio('assets/sounds/sfx_correct.mp3'),
@@ -18,11 +20,13 @@ Object.values(sounds).forEach(sound => {
  * Get star image path based on level and state
  * @param {number} level - Star level (0-5)
  * @param {string} state - Star state (active, frozen, broken)
+ * @param {number} size - Image size (32, 64, 96, 128, 256, or 384 for full size)
  * @returns {string} Path to star image
  */
-function getStarImage(level, state) {
+function getStarImage(level, state, size = 384) {
   if (state === 'broken') {
-    return 'assets/images/star_broken_384.png';
+    const sizeStr = size === 384 ? '' : `_${size}`;
+    return `assets/images/star_broken_384${sizeStr}.png`;
   }
   
   const colorMap = {
@@ -36,8 +40,9 @@ function getStarImage(level, state) {
   
   const color = colorMap[level] || 'neutral';
   const frozen = (state === 'frozen') ? '_frozen' : '';
+  const sizeStr = size === 384 ? '' : `_${size}`;
   
-  return `assets/images/star_${color}_384${frozen}.png`;
+  return `assets/images/star_${color}_384${frozen}${sizeStr}.png`;
 }
 
 /**
@@ -64,36 +69,26 @@ function getStarColor(level) {
 export function renderStarSummary(summary) {
   const container = document.getElementById('star-summary');
   
-  container.innerHTML = `
-    <div class="summary-item">
-      <span class="star-icon broken">★</span>
-      <span class="count">${summary.broken}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon outline">☆</span>
-      <span class="count">${summary.outline}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon yellow">★</span>
-      <span class="count">${summary.yellow}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon pink">★</span>
-      <span class="count">${summary.pink}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon blue">★</span>
-      <span class="count">${summary.blue}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon purple">★</span>
-      <span class="count">${summary.purple}</span>
-    </div>
-    <div class="summary-item">
-      <span class="star-icon golden">★</span>
-      <span class="count">${summary.golden}</span>
-    </div>
-  `;
+  // Define the star types and their corresponding level/state
+  const starTypes = [
+    { key: 'broken', level: 0, state: 'broken', count: summary.broken },
+    { key: 'outline', level: 0, state: 'active', count: summary.outline },
+    { key: 'yellow', level: 1, state: 'active', count: summary.yellow },
+    { key: 'pink', level: 2, state: 'active', count: summary.pink },
+    { key: 'blue', level: 3, state: 'active', count: summary.blue },
+    { key: 'purple', level: 4, state: 'active', count: summary.purple },
+    { key: 'golden', level: 5, state: 'active', count: summary.golden }
+  ];
+  
+  container.innerHTML = starTypes.map(star => {
+    const imagePath = getStarImage(star.level, star.state, 32);
+    return `
+      <div class="summary-item">
+        <img src="${imagePath}" alt="${star.key} star" class="summary-star-icon" />
+        <span class="count">${star.count}</span>
+      </div>
+    `;
+  }).join('');
 }
 
 /**
@@ -267,18 +262,222 @@ export function playSound(soundType) {
 }
 
 /**
- * Animate star transition
- * @param {string} transitionType - Type of transition (levelUp, freeze, break, reset)
+ * Animate star transition with enhanced effects
+ * @param {string} transitionType - Type of transition (levelUp, freeze, break, unfreeze, reset, recover)
  */
 export function animateStarTransition(transitionType) {
   const starElement = document.querySelector('.current-star-display');
   if (!starElement) return;
   
-  starElement.classList.add(`star-${transitionType}`);
+  const starImage = starElement.querySelector('.star-image');
+  if (!starImage) return;
   
+  switch (transitionType) {
+    case 'levelUp':
+      animateLevelUp(starElement, starImage);
+      break;
+    case 'freeze':
+      animateFreeze(starElement, starImage);
+      break;
+    case 'unfreeze':
+      // Defrost uses same animation as level-up
+      animateLevelUp(starElement, starImage);
+      break;
+    case 'break':
+      animateBreak(starElement, starImage);
+      break;
+    case 'reset':
+      starElement.classList.add('star-reset');
+      setTimeout(() => starElement.classList.remove('star-reset'), 600);
+      break;
+    case 'recover':
+      starElement.classList.add('star-recover');
+      setTimeout(() => starElement.classList.remove('star-recover'), 600);
+      break;
+  }
+}
+
+/**
+ * Animate level-up: swivel (scaleX rotation) then pop/bounce with sparkles
+ * @param {HTMLElement} starElement - Star container element
+ * @param {HTMLElement} starImage - Star image element
+ */
+function animateLevelUp(starElement, starImage) {
+  const config = ANIMATION_CONFIG.swivel;
+  const popConfig = ANIMATION_CONFIG.pop;
+  
+  // Get star bounding rect for centering particles
+  const rect = starImage.getBoundingClientRect();
+  const starCenterX = rect.left + rect.width / 2;
+  const starCenterY = rect.top + rect.height / 2;
+  
+  // Phase 1: Swivel animation (scaleX rotation)
+  const swivelDuration = getAdjustedDuration(config.duration);
+  
+  // Create swivel effect using scaleX with multiple iterations
+  const swivelKeyframes = [];
+  const iterations = config.rotations;
+  for (let i = 0; i <= iterations; i++) {
+    const progress = i / iterations;
+    const scaleX = i % 2 === 0 ? config.scaleXStart : config.scaleXMid;
+    swivelKeyframes.push({
+      transform: `scaleX(${scaleX})`,
+      offset: progress
+    });
+  }
+  
+  const swivelAnimation = starImage.animate(swivelKeyframes, {
+    duration: swivelDuration,
+    easing: config.easing,
+    fill: 'forwards'
+  });
+  
+  // Phase 2: Pop/bounce animation after swivel
+  swivelAnimation.onfinish = () => {
+    const popDuration = getAdjustedDuration(popConfig.duration);
+    
+    // Build pop keyframes from config
+    const popKeyframes = popConfig.stages.map((stage, index) => ({
+      transform: `scale(${stage.scale}) translateY(${-popConfig.wobbleAmplitude * Math.sin(index * Math.PI / 3)}px)`,
+      offset: index / (popConfig.stages.length - 1)
+    }));
+    
+    starImage.animate(popKeyframes, {
+      duration: popDuration,
+      easing: popConfig.easing,
+      fill: 'forwards'
+    });
+    
+    // Create sparkle particles
+    createSparkles(starElement, starCenterX, starCenterY);
+  };
+}
+
+/**
+ * Animate freeze: 3-step opacity transition with perfect alignment
+ * @param {HTMLElement} starElement - Star container element
+ * @param {HTMLElement} starImage - Star image element
+ */
+function animateFreeze(starElement, starImage) {
+  const config = ANIMATION_CONFIG.freeze;
+  const container = starImage.parentElement;
+  
+  // Get the frozen version of the current star
+  const frozenSrc = starImage.src;
+  const nonFrozenSrc = frozenSrc.replace('_frozen', '');
+  
+  // Temporarily swap to non-frozen image
+  starImage.src = nonFrozenSrc;
+  
+  // Create ice overlay element with exact same dimensions
+  const iceOverlay = document.createElement('img');
+  iceOverlay.className = 'ice-overlay';
+  iceOverlay.src = frozenSrc;
+  
+  // Match exact dimensions and position
+  const rect = starImage.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+  
+  iceOverlay.style.width = `${rect.width}px`;
+  iceOverlay.style.height = `${rect.height}px`;
+  iceOverlay.style.left = `${rect.left - containerRect.left}px`;
+  iceOverlay.style.top = `${rect.top - containerRect.top}px`;
+  iceOverlay.style.opacity = '0';
+  iceOverlay.style.transition = 'none';
+  
+  container.style.position = 'relative';
+  container.appendChild(iceOverlay);
+  
+  // Animate through 3 opacity steps
+  config.steps.forEach((step, index) => {
+    setTimeout(() => {
+      iceOverlay.style.transition = `opacity ${config.stepDuration}ms ${config.easing}`;
+      iceOverlay.style.opacity = step.opacity.toString();
+    }, step.delay);
+  });
+  
+  // After animation completes, swap to frozen image and remove overlay
   setTimeout(() => {
-    starElement.classList.remove(`star-${transitionType}`);
-  }, 600);
+    starImage.src = frozenSrc;
+    iceOverlay.remove();
+  }, getAdjustedDuration(config.totalDuration));
+}
+
+/**
+ * Animate break: simple bounce in, no second animation
+ * @param {HTMLElement} starElement - Star container element
+ * @param {HTMLElement} starImage - Star image element
+ */
+function animateBreak(starElement, starImage) {
+  const config = ANIMATION_CONFIG.broken;
+  const duration = getAdjustedDuration(config.duration);
+  
+  // Build broken star keyframes from config
+  const keyframes = config.stages.map((stage, index) => ({
+    transform: `scale(${stage.scale}) translateY(${stage.translateY}px)`,
+    opacity: stage.opacity,
+    offset: index / (config.stages.length - 1)
+  }));
+  
+  // Only animate the star image, not the word
+  starImage.animate(keyframes, {
+    duration: duration,
+    easing: config.easing,
+    fill: 'forwards'
+  });
+}
+
+/**
+ * Create sparkle particle effects emanating from star center
+ * @param {HTMLElement} container - Container element for sparkles
+ * @param {number} centerX - Absolute X position of star center
+ * @param {number} centerY - Absolute Y position of star center
+ */
+function createSparkles(container, centerX, centerY) {
+  const config = ANIMATION_CONFIG.particles;
+  const particleCount = config.count;
+  
+  // Get container position for relative positioning
+  const containerRect = container.getBoundingClientRect();
+  const relativeX = centerX - containerRect.left;
+  const relativeY = centerY - containerRect.top;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle-particle';
+    
+    // Random properties from config
+    const angle = (Math.random() * config.spreadAngle - config.spreadAngle / 2) * Math.PI / 180;
+    const distance = config.minDistance + Math.random() * (config.maxDistance - config.minDistance);
+    const size = config.minSize + Math.random() * (config.maxSize - config.minSize);
+    const lifetime = config.minLifetime + Math.random() * (config.maxLifetime - config.minLifetime);
+    const color = config.colors[Math.floor(Math.random() * config.colors.length)];
+    
+    // Calculate end position
+    const xOffset = Math.cos(angle) * distance;
+    const yOffset = Math.sin(angle) * distance;
+    
+    // Set sparkle styles
+    sparkle.style.width = `${size}px`;
+    sparkle.style.height = `${size}px`;
+    sparkle.style.left = `${relativeX}px`;
+    sparkle.style.top = `${relativeY}px`;
+    sparkle.style.color = color;
+    sparkle.style.setProperty('--sparkle-x', `${xOffset}px`);
+    sparkle.style.setProperty('--sparkle-y', `${yOffset}px`);
+    
+    container.style.position = 'relative';
+    container.appendChild(sparkle);
+    
+    // Animate sparkle
+    const adjustedLifetime = getAdjustedDuration(lifetime);
+    sparkle.style.animation = `sparkle ${adjustedLifetime}ms ease-out forwards`;
+    
+    // Remove sparkle after animation
+    setTimeout(() => {
+      sparkle.remove();
+    }, adjustedLifetime);
+  }
 }
 
 /**
@@ -319,20 +518,12 @@ export function setOkButton(text, onClick) {
 }
 
 /**
- * Get star display for dictionary (emoji representation)
+ * Get star display for dictionary (real star image)
  * @param {Object} verbState - State of the verb
- * @returns {string} Star emoji
+ * @returns {string} Star image HTML
  */
 export function getStarDisplayForDictionary(verbState) {
-  if (verbState.state === 'broken') {
-    return '💔'; // Broken heart/star
-  } else if (verbState.state === 'frozen') {
-    return '❄️'; // Frozen
-  } else if (verbState.level === 0) {
-    return '☆'; // Outline star
-  } else {
-    // Colored stars based on level
-    const colors = ['', '⭐', '💗', '💙', '💜', '🌟'];
-    return colors[verbState.level] || '☆';
-  }
+  const imagePath = getStarImage(verbState.level, verbState.state, 64);
+  const frozenClass = verbState.state === 'frozen' ? 'frozen-dict' : '';
+  return `<img src="${imagePath}" alt="star" class="dictionary-star-image ${frozenClass}" />`;
 }
