@@ -498,6 +498,8 @@ body {
   font-weight: bold;
   min-height: 24px;
   text-align: center;
+  margin-top: 15px;
+  padding: 10px;
 }
 
 .feedback.correct {
@@ -521,6 +523,34 @@ body {
 
 .feedback-appear {
   animation: feedbackAppear 0.3s ease;
+}
+
+/* Star count animations */
+.summary-item .count {
+  display: inline-block;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+@keyframes starCountBounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.count-decrease {
+  animation: starCountBounce 0.5s ease;
+  color: #dc3545 !important;
+}
+
+.count-increase {
+  animation: starCountBounce 0.5s ease;
+  color: #28a745 !important;
 }
 
 /* Responsive Design */

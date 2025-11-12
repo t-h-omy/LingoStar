@@ -64,10 +64,11 @@ function getStarColor(level) {
 }
 
 /**
- * Render star summary in top bar
+ * Render star summary in top bar with optional animation for count changes
  * @param {Object} summary - Star summary object
+ * @param {Object} previousSummary - Previous summary object for animation (optional)
  */
-export function renderStarSummary(summary) {
+export function renderStarSummary(summary, previousSummary = null) {
   const container = document.getElementById('star-summary');
   
   // Define the star types and their corresponding level/state
@@ -81,15 +82,82 @@ export function renderStarSummary(summary) {
     { key: 'golden', level: 5, state: 'active', count: summary.golden }
   ];
   
-  container.innerHTML = starTypes.map(star => {
-    const imagePath = getStarImage(star.level, star.state, 32);
-    return `
-      <div class="summary-item">
-        <img src="${imagePath}" alt="${star.key} star" class="summary-star-icon" />
-        <span class="count">${star.count}</span>
-      </div>
-    `;
-  }).join('');
+  // Check if this is the initial render (no existing content)
+  const isInitialRender = !container.innerHTML || !previousSummary;
+  
+  if (isInitialRender) {
+    // Initial render without animation
+    container.innerHTML = starTypes.map(star => {
+      const imagePath = getStarImage(star.level, star.state, 32);
+      return `
+        <div class="summary-item" data-key="${star.key}">
+          <img src="${imagePath}" alt="${star.key} star" class="summary-star-icon" />
+          <span class="count" data-count="${star.count}">${star.count}</span>
+        </div>
+      `;
+    }).join('');
+  } else {
+    // Update with animation for changed counts
+    animateStarCountChanges(starTypes, previousSummary);
+  }
+}
+
+/**
+ * Animate star count changes with sequential animations
+ * @param {Array} starTypes - Array of star type definitions with current counts
+ * @param {Object} previousSummary - Previous summary counts
+ */
+function animateStarCountChanges(starTypes, previousSummary) {
+  const changes = [];
+  
+  // Collect all changes
+  starTypes.forEach(star => {
+    const oldCount = previousSummary[star.key];
+    const newCount = star.count;
+    
+    if (oldCount !== newCount) {
+      changes.push({
+        key: star.key,
+        oldCount,
+        newCount,
+        type: newCount < oldCount ? 'decrease' : 'increase'
+      });
+    }
+  });
+  
+  // Apply animations sequentially
+  if (changes.length > 0) {
+    // Sort: decreases first, then increases
+    changes.sort((a, b) => {
+      if (a.type === 'decrease' && b.type === 'increase') return -1;
+      if (a.type === 'increase' && b.type === 'decrease') return 1;
+      return 0;
+    });
+    
+    // Apply animations with delay
+    changes.forEach((change, index) => {
+      setTimeout(() => {
+        const item = document.querySelector(`.summary-item[data-key="${change.key}"]`);
+        if (item) {
+          const countSpan = item.querySelector('.count');
+          if (countSpan) {
+            // Update the count
+            countSpan.textContent = change.newCount;
+            countSpan.setAttribute('data-count', change.newCount);
+            
+            // Add animation class
+            const animClass = change.type === 'decrease' ? 'count-decrease' : 'count-increase';
+            countSpan.classList.add(animClass);
+            
+            // Remove animation class after animation completes
+            setTimeout(() => {
+              countSpan.classList.remove(animClass);
+            }, 500);
+          }
+        }
+      }, index * 500); // 500ms delay between animations
+    });
+  }
 }
 
 /**
