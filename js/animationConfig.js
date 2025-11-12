@@ -34,15 +34,15 @@ export const ANIMATION_CONFIG = {
   
   // Particle effects
   particles: {
-    count: 30,                  // Number of particles per burst
-    minLifetime: 500,           // Minimum particle lifetime in ms
-    maxLifetime: 2000,           // Maximum particle lifetime in ms
+    count: 50,                  // Number of particles per burst
+    minLifetime: 1000,           // Minimum particle lifetime in ms
+    maxLifetime: 2500,           // Maximum particle lifetime in ms
     minSize: 4,                 // Minimum particle size in pixels
     maxSize: 10,                // Maximum particle size in pixels
-    minDistance: 40,            // Minimum travel distance in pixels
-    maxDistance: 250,            // Maximum travel distance in pixels
+    minDistance: 60,            // Minimum travel distance in pixels
+    maxDistance: 300,            // Maximum travel distance in pixels
     spreadAngle: 360,           // Spread angle in degrees (360 = full circle)
-    fadeOutStart: 0.75,          // When to start fading (0-1, relative to lifetime)
+    fadeOutStart: 0.8,          // When to start fading (0-1, relative to lifetime)
     colors: [
       '#FFD700',                // Gold
       '#FFA500',                // Orange
@@ -56,9 +56,9 @@ export const ANIMATION_CONFIG = {
     stepDuration: 250,          // Duration of each opacity step in ms
     steps: [
       { opacity: 0, delay: 0 },
-      { opacity: 0.33, delay: 250 },
-      { opacity: 0.66, delay: 500 },
-      { opacity: 1, delay: 750 }
+      { opacity: 0.33, delay: 0 },
+      { opacity: 0.66, delay: 0 },
+      { opacity: 1, delay: 0 }
     ],
     totalDuration: 1000,        // Total freeze animation duration
     easing: 'ease'              // CSS easing function
