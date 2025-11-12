@@ -19,3 +19,6 @@ Thumbs.db
 # Temporary files
 /tmp/
 *.log
+
+# Screenshots (for testing)
+screenshots/

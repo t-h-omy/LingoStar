@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lingostar-v1.6.0';
+const CACHE_NAME = 'lingostar-v1.6.1';
 const urlsToCache = [
   './',
   './index.html',
