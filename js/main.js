@@ -18,6 +18,9 @@ let okButtonHandler = null; // Track the current OK button handler
  * Initialize the app
  */
 async function init() {
+  // Clear reload flag on successful load (update completed)
+  sessionStorage.removeItem('lingostar_sw_reloaded');
+  
   // Register service worker with update handling
   if ('serviceWorker' in navigator) {
     try {
@@ -85,8 +88,11 @@ function setupServiceWorkerUpdateHandler(registration) {
   
   // Handle controller change (when new SW takes over)
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    // Reload page to show new version
-    window.location.reload();
+    // Prevent reload loop - only reload if we haven't reloaded for this update yet
+    if (!sessionStorage.getItem('lingostar_sw_reloaded')) {
+      sessionStorage.setItem('lingostar_sw_reloaded', 'true');
+      window.location.reload();
+    }
   });
 }
 
@@ -314,7 +320,10 @@ function playSoundForStateChange(oldState, newState, isCorrect) {
       ui.playSound('correct');
     }
   } else {
-    if (oldState.state === 'active' && oldState.level > 0 && newState.state === 'frozen') {
+    if (oldState.state === 'active' && oldState.level === 0 && newState.state === 'broken') {
+      // Neutral star broke - play break sound
+      ui.playSound('break');
+    } else if (oldState.state === 'active' && oldState.level > 0 && newState.state === 'frozen') {
       // Colored star frozen
       ui.playSound('freeze');
     } else {

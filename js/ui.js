@@ -7,7 +7,8 @@ const sounds = {
   correct: new Audio('assets/sounds/sfx_correct.mp3'),
   incorrect: new Audio('assets/sounds/sfx_incorrect.mp3'),
   freeze: new Audio('assets/sounds/sfx_freeze.mp3'),
-  unfreeze: new Audio('assets/sounds/sfx_unfreeze.mp3')
+  unfreeze: new Audio('assets/sounds/sfx_unfreeze.mp3'),
+  break: new Audio('assets/sounds/sfx_break.mp3')
 };
 
 // Preload all sounds

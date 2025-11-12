@@ -55,10 +55,10 @@ export const ANIMATION_CONFIG = {
   freeze: {
     stepDuration: 250,          // Duration of each opacity step in ms
     steps: [
-      { opacity: 0, delay: 0 },
-      { opacity: 0.33, delay: 0 },
-      { opacity: 0.66, delay: 0 },
-      { opacity: 1, delay: 0 }
+      { opacity: 0, delay: 0 },          // Start at 0 opacity
+      { opacity: 0.33, delay: 250 },     // After 250ms, go to 33%
+      { opacity: 0.66, delay: 500 },     // After 500ms total, go to 66%
+      { opacity: 1, delay: 750 }         // After 750ms total, go to 100%
     ],
     totalDuration: 1000,        // Total freeze animation duration
     easing: 'ease'              // CSS easing function
