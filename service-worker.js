@@ -7,6 +7,7 @@ const urlsToCache = [
   './js/ui.js',
   './js/storage.js',
   './js/exercises.js',
+  './js/animationConfig.js',
   './lingostar_verbs.json',
   './assets/sounds/sfx_correct.mp3',
   './assets/sounds/sfx_incorrect.mp3',

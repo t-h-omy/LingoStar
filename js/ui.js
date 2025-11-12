@@ -1,5 +1,7 @@
 // ui.js - Manages DOM updates and rendering
 
+import { ANIMATION_CONFIG, getAdjustedDuration } from './animationConfig.js';
+
 // Preload sound effects
 const sounds = {
   correct: new Audio('assets/sounds/sfx_correct.mp3'),
@@ -296,125 +298,185 @@ export function animateStarTransition(transitionType) {
 }
 
 /**
- * Animate level-up: bounce new star in with sparkles
+ * Animate level-up: swivel (scaleX rotation) then pop/bounce with sparkles
  * @param {HTMLElement} starElement - Star container element
  * @param {HTMLElement} starImage - Star image element
  */
 function animateLevelUp(starElement, starImage) {
-  // Apply bounce-in animation to the newly rendered star
-  starImage.style.animation = 'starBounceIn 0.6s ease-out forwards';
+  const config = ANIMATION_CONFIG.swivel;
+  const popConfig = ANIMATION_CONFIG.pop;
   
-  // Create sparkle effect
-  createSparkles(starElement);
+  // Get star bounding rect for centering particles
+  const rect = starImage.getBoundingClientRect();
+  const starCenterX = rect.left + rect.width / 2;
+  const starCenterY = rect.top + rect.height / 2;
   
-  // Clean up
-  setTimeout(() => {
-    starImage.style.animation = '';
-  }, 600);
+  // Phase 1: Swivel animation (scaleX rotation)
+  const swivelDuration = getAdjustedDuration(config.duration);
+  
+  // Create swivel effect using scaleX with multiple iterations
+  const swivelKeyframes = [];
+  const iterations = config.rotations;
+  for (let i = 0; i <= iterations; i++) {
+    const progress = i / iterations;
+    const scaleX = i % 2 === 0 ? config.scaleXStart : config.scaleXMid;
+    swivelKeyframes.push({
+      transform: `scaleX(${scaleX})`,
+      offset: progress
+    });
+  }
+  
+  const swivelAnimation = starImage.animate(swivelKeyframes, {
+    duration: swivelDuration,
+    easing: config.easing,
+    fill: 'forwards'
+  });
+  
+  // Phase 2: Pop/bounce animation after swivel
+  swivelAnimation.onfinish = () => {
+    const popDuration = getAdjustedDuration(popConfig.duration);
+    
+    // Build pop keyframes from config
+    const popKeyframes = popConfig.stages.map((stage, index) => ({
+      transform: `scale(${stage.scale}) translateY(${-popConfig.wobbleAmplitude * Math.sin(index * Math.PI / 3)}px)`,
+      offset: index / (popConfig.stages.length - 1)
+    }));
+    
+    starImage.animate(popKeyframes, {
+      duration: popDuration,
+      easing: popConfig.easing,
+      fill: 'forwards'
+    });
+    
+    // Create sparkle particles
+    createSparkles(starElement, starCenterX, starCenterY);
+  };
 }
 
 /**
- * Animate freeze: 3-step opacity transition
+ * Animate freeze: 3-step opacity transition with perfect alignment
  * @param {HTMLElement} starElement - Star container element
  * @param {HTMLElement} starImage - Star image element
  */
 function animateFreeze(starElement, starImage) {
+  const config = ANIMATION_CONFIG.freeze;
   const container = starImage.parentElement;
   
-  // The star image is already the frozen version, so we need to:
-  // 1. Temporarily show the non-frozen version
-  // 2. Overlay with the frozen version at increasing opacity
-  
+  // Get the frozen version of the current star
   const frozenSrc = starImage.src;
   const nonFrozenSrc = frozenSrc.replace('_frozen', '');
   
   // Temporarily swap to non-frozen image
   starImage.src = nonFrozenSrc;
   
-  // Create ice overlay element with the frozen version
+  // Create ice overlay element with exact same dimensions
   const iceOverlay = document.createElement('img');
   iceOverlay.className = 'ice-overlay';
-  iceOverlay.style.position = 'absolute';
-  iceOverlay.style.top = '0';
-  iceOverlay.style.left = '0';
-  iceOverlay.style.width = '100%';
-  iceOverlay.style.height = '100%';
-  iceOverlay.style.opacity = '0';
-  iceOverlay.style.transition = 'opacity 0.15s ease';
-  iceOverlay.style.pointerEvents = 'none';
   iceOverlay.src = frozenSrc;
+  
+  // Match exact dimensions and position
+  const rect = starImage.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+  
+  iceOverlay.style.width = `${rect.width}px`;
+  iceOverlay.style.height = `${rect.height}px`;
+  iceOverlay.style.left = `${rect.left - containerRect.left}px`;
+  iceOverlay.style.top = `${rect.top - containerRect.top}px`;
+  iceOverlay.style.opacity = '0';
+  iceOverlay.style.transition = 'none';
   
   container.style.position = 'relative';
   container.appendChild(iceOverlay);
   
-  // Step 1: 33% opacity
-  setTimeout(() => {
-    iceOverlay.style.opacity = '0.33';
-  }, 50);
+  // Animate through 3 opacity steps
+  config.steps.forEach((step, index) => {
+    setTimeout(() => {
+      iceOverlay.style.transition = `opacity ${config.stepDuration}ms ${config.easing}`;
+      iceOverlay.style.opacity = step.opacity.toString();
+    }, step.delay);
+  });
   
-  // Step 2: 66% opacity
-  setTimeout(() => {
-    iceOverlay.style.opacity = '0.66';
-  }, 200);
-  
-  // Step 3: 100% opacity
-  setTimeout(() => {
-    iceOverlay.style.opacity = '1';
-  }, 350);
-  
-  // After animation, swap back to frozen image and remove overlay
+  // After animation completes, swap to frozen image and remove overlay
   setTimeout(() => {
     starImage.src = frozenSrc;
     iceOverlay.remove();
-  }, 500);
+  }, getAdjustedDuration(config.totalDuration));
 }
 
 /**
- * Animate break: broken star bounces in, outline pushed away
+ * Animate break: simple bounce in, no second animation
  * @param {HTMLElement} starElement - Star container element
  * @param {HTMLElement} starImage - Star image element
  */
 function animateBreak(starElement, starImage) {
-  // Apply broken star animation
-  starElement.classList.add('star-break');
+  const config = ANIMATION_CONFIG.broken;
+  const duration = getAdjustedDuration(config.duration);
   
-  setTimeout(() => {
-    starElement.classList.remove('star-break');
-  }, 600);
+  // Build broken star keyframes from config
+  const keyframes = config.stages.map((stage, index) => ({
+    transform: `scale(${stage.scale}) translateY(${stage.translateY}px)`,
+    opacity: stage.opacity,
+    offset: index / (config.stages.length - 1)
+  }));
+  
+  // Only animate the star image, not the word
+  starImage.animate(keyframes, {
+    duration: duration,
+    easing: config.easing,
+    fill: 'forwards'
+  });
 }
 
 /**
- * Create sparkle particle effects around the star
+ * Create sparkle particle effects emanating from star center
  * @param {HTMLElement} container - Container element for sparkles
+ * @param {number} centerX - Absolute X position of star center
+ * @param {number} centerY - Absolute Y position of star center
  */
-function createSparkles(container) {
-  const sparkleCount = 8;
-  const containerRect = container.getBoundingClientRect();
-  const centerX = containerRect.width / 2;
-  const centerY = containerRect.height / 2;
+function createSparkles(container, centerX, centerY) {
+  const config = ANIMATION_CONFIG.particles;
+  const particleCount = config.count;
   
-  for (let i = 0; i < sparkleCount; i++) {
+  // Get container position for relative positioning
+  const containerRect = container.getBoundingClientRect();
+  const relativeX = centerX - containerRect.left;
+  const relativeY = centerY - containerRect.top;
+  
+  for (let i = 0; i < particleCount; i++) {
     const sparkle = document.createElement('div');
     sparkle.className = 'sparkle-particle';
     
-    // Calculate random direction
-    const angle = (i / sparkleCount) * 2 * Math.PI;
-    const distance = 40 + Math.random() * 20;
+    // Random properties from config
+    const angle = (Math.random() * config.spreadAngle - config.spreadAngle / 2) * Math.PI / 180;
+    const distance = config.minDistance + Math.random() * (config.maxDistance - config.minDistance);
+    const size = config.minSize + Math.random() * (config.maxSize - config.minSize);
+    const lifetime = config.minLifetime + Math.random() * (config.maxLifetime - config.minLifetime);
+    const color = config.colors[Math.floor(Math.random() * config.colors.length)];
+    
+    // Calculate end position
     const xOffset = Math.cos(angle) * distance;
     const yOffset = Math.sin(angle) * distance;
     
+    // Set sparkle styles
+    sparkle.style.width = `${size}px`;
+    sparkle.style.height = `${size}px`;
+    sparkle.style.left = `${relativeX}px`;
+    sparkle.style.top = `${relativeY}px`;
+    sparkle.style.color = color;
     sparkle.style.setProperty('--sparkle-x', `${xOffset}px`);
     sparkle.style.setProperty('--sparkle-y', `${yOffset}px`);
-    sparkle.style.left = `${centerX}px`;
-    sparkle.style.top = `${centerY}px`;
     
     container.style.position = 'relative';
     container.appendChild(sparkle);
     
+    // Animate sparkle
+    const adjustedLifetime = getAdjustedDuration(lifetime);
+    sparkle.style.animation = `sparkle ${adjustedLifetime}ms ease-out forwards`;
+    
     // Remove sparkle after animation
     setTimeout(() => {
       sparkle.remove();
-    }, 600);
+    }, adjustedLifetime);
   }
 }
 
